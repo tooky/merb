@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), <%= go_up(modules.size + 1) %>, 'spec_
 
 given "a <%= singular_model %> exists" do
   request(resource(:<%= plural_model %>), :method => "POST", 
-    :params => { :<%= singular_model %> => {  }})
+    :params => { :<%= singular_model %> => { :id => nil }})
 end
 
 describe "resource(:<%= plural_model %>)" do
@@ -42,7 +42,7 @@ describe "resource(:<%= plural_model %>)" do
       <%= model_class_name %>.delete_all
     <% end -%>
       @response = request(resource(:<%= plural_model %>), :method => "POST", 
-        :params => { :<%= singular_model %> => {  }})
+        :params => { :<%= singular_model %> => { :id => nil }})
     end
     
     it "redirects to resource(:<%= plural_model %>)" do
