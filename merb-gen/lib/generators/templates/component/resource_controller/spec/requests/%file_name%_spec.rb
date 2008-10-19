@@ -1,6 +1,11 @@
 require File.join(File.dirname(__FILE__), <%= go_up(modules.size + 1) %>, 'spec_helper.rb')
 
 given "a <%= singular_model %> exists" do
+<%- if orm.to_sym == :datamapper -%>
+  <%= model_class_name %>.all.destroy!
+<%-elsif orm.to_sym == :activerecord -%>
+  <%= model_class_name %>.delete_all
+<% end -%>
   request(resource(:<%= plural_model %>), :method => "POST", 
     :params => { :<%= singular_model %> => { :id => nil }})
 end
@@ -57,16 +62,8 @@ describe "resource(:<%= plural_model %>)" do
 end
 
 describe "resource(@<%= singular_model %>)" do 
-  
-  describe "a successful DELETE" do
+  describe "a successful DELETE", :given => "a <%= singular_model %> exists" do
      before(:each) do
-     <%- if orm.to_sym == :datamapper -%>
-       <%= model_class_name %>.all.destroy!
-     <%-elsif orm.to_sym == :activerecord -%>
-       <%= model_class_name %>.delete_all
-     <% end -%>
-       @response = request(resource(:<%= plural_model %>), :method => "POST", 
-         :params => { :<%= singular_model %> => { :id => nil }})
        @response = request(resource(<%= model_class_name %>.first), :method => "DELETE")
      end
 
@@ -75,6 +72,51 @@ describe "resource(@<%= singular_model %>)" do
      end
 
    end
-   
+end
+
+describe "resource(:<%= plural_model %>, :new)" do
+  before(:each) do
+    @response = request(resource(:<%= plural_model %>, :new))
+  end
+  
+  it "responds successfully" do
+    @response.should be_successful
+  end
+end
+
+describe "resource(@<%= singular_model %>, :edit)", :given => "a <%= singular_model %> exists" do
+  before(:each) do
+    @response = request(resource(<%= model_class_name %>.first, :edit))
+  end
+  
+  it "responds successfully" do
+    @response.should be_successful
+  end
+end
+
+describe "resource(@<%= singular_model %>)", :given => "a <%= singular_model %> exists" do
+  
+  describe "GET" do
+    before(:each) do
+      @response = request(resource(<%= model_class_name %>.first))
+    end
+  
+    it "responds successfully" do
+      @response.should be_successful
+    end
+  end
+  
+  describe "PUT" do
+    before(:each) do
+      @<%= singular_model %> = <%= model_class_name %>.first
+      @response = request(resource(@<%= singular_model %>), :method => "PUT", 
+        :params => { :article => {:id => @<%= singular_model %>.id} })
+    end
+  
+    it "redirect to the article show action" do
+      @response.should redirect_to(resource(@<%= singular_model %>))
+    end
+  end
+  
 end
 
