@@ -54,5 +54,24 @@ describe "resource(:<%= plural_model %>)" do
     end
     
   end
+  
+  describe "a successful DELETE" do
+     before(:each) do
+     <%- if orm.to_sym == :datamapper -%>
+       <%= model_class_name %>.all.destroy!
+     <%-elsif orm.to_sym == :activerecord -%>
+       <%= model_class_name %>.delete_all
+     <% end -%>
+       @response = request(resource(:<%= plural_model %>), :method => "POST", 
+         :params => { :<%= singular_model %> => { :id => nil }})
+       @response = request(resource(<%= model_class_name %>.first), :method => "DELETE")
+     end
+
+     it "should redirect to the index action" do
+       @response.should redirect_to(resource(:<%= plural_model %>))
+     end
+
+   end
+   
 end
 
