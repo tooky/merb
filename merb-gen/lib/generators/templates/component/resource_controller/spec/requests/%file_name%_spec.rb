@@ -9,14 +9,14 @@ describe "resource(:<%= plural_model %>)" do
   describe "GET" do
     
     before(:each) do
-      @response = request(resource(:<%= singular_model %>s))
+      @response = request(resource(:<%= plural_model %>))
     end
     
     it "responds successfully" do
       @response.should be_successful
     end
 
-    it "contains a list of speakers" do
+    it "contains a list of <%= plural_model %>" do
       pending
       @response.should have_xpath("//ul")
     end
@@ -54,6 +54,9 @@ describe "resource(:<%= plural_model %>)" do
     end
     
   end
+end
+
+describe "resource(@<%= singular_model %>)" do 
   
   describe "a successful DELETE" do
      before(:each) do
