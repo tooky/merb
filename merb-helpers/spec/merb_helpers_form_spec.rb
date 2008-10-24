@@ -924,9 +924,17 @@ describe "bound option tags" do
 
 
   it "should use text_method and value_method for tag generation" do
-    r = @c.render :text_and_value  
-    r.should match_tag( :option, :content => "foowee", :value => "7" )
-    r.should match_tag( :option, :content => "foowee2", :value => "barbar" ) 
+    # use methods on the collection objects that don't exist on the bound object
+    model1 = FakeModel3.new ; model1.oof = "tackle" ; model1.rab = "rugby"
+    model2 = FakeModel3.new ; model2.oof = "kick" ; model2.rab = "kung fu"
+    model3 = FakeModel3.new ; model3.oof = "throw" ; model3.rab = "judo"
+
+    @c.instance_variable_set(:@collection, [model1, model2, model3])
+
+    r = @c.render :text_and_value
+    r.should match_tag( :option, :content => "tackle", :value => "rugby" )
+    r.should match_tag( :option, :content => "kick", :value => "kung fu" )
+    r.should match_tag( :option, :content => "throw", :value => "judo" )
 
     # content = options_from_collection_for_select( [FakeModel.new, FakeModel2.new], :text_method => 'foo', :value_method => 'bar' )
     # content.should match_tag( :option, :content => "foowee", :value => "7" )
