@@ -149,6 +149,13 @@ module Merb
       @_message = defined?(@_message) ? @_message : request.message
     end
     
+    # Sets the redirect message for the current request, like flash.now in Rails.
+    #
+    # @api public
+    def message=(message)
+      @_message = message
+    end
+
     # Sends a file over HTTP.  When given a path to a file, it will set the
     # right headers so that the static file is served directly.
     # 
