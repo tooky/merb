@@ -91,7 +91,7 @@ module Merb
     LOCATION                 = "Location".freeze
     TEXT_SLASH_HTML          = "text/html".freeze
 
-    WIN_PLATFORM_REGEXP      = /(:?mswin|mingw)/.freeze
+    WIN_PLATFORM_REGEXP      = /(:?mswin|mingw|cygwin)/.freeze
     JAVA_PLATFORM_REGEXP     = /java/.freeze
   end
 end
