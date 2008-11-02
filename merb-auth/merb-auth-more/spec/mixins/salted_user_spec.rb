@@ -101,5 +101,12 @@ describe "A Salted User" do
       (@user.save).should be_true
     end
     
+    it "should vary salt with login parameter" do
+      now = Time.now
+      Time.stub!(:now).and_return(now)
+      user1 = Utilisateur.create(default_user_params.merge(:login => "abc"))
+      user2 = Utilisateur.create(default_user_params.merge(:login => "123"))
+      user1.salt.should_not == user2.salt
+    end
   end  
 end
