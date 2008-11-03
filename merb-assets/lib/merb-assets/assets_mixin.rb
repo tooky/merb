@@ -435,7 +435,7 @@ module Merb
       if (bundle_name = options[:bundle]) && Merb::Assets.bundle? && scripts.size > 1
         bundler = Merb::Assets::JavascriptAssetBundler.new(bundle_name, *scripts)
         bundled_asset = bundler.bundle!
-        return js_include_tag(bundled_asset)
+        return js_include_tag(bundled_asset, options.except(:bundle))
       end
 
       tags = ""

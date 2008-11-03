@@ -217,6 +217,14 @@ describe "External JavaScript and Stylesheets" do
     Merb::Config[:bundle_assets] = false
   end
 
+  it "should create a js include tag with a random query string when bundled" do
+    Merb.root = File.dirname(__FILE__) + '/fixture'
+    Merb::Config[:bundle_assets] = true
+    result = js_include_tag('master', 'application', :bundle => :base, :reload => true)
+    result.should match(%r{/javascripts/base.js\?\d+})
+    Merb::Config[:bundle_assets] = false
+  end
+
   it "should return a uniq path for a single asset" do
     uniq_path("/javascripts/my.js").should ==
       "http://assets2.my-awesome-domain.com/javascripts/my.js"
