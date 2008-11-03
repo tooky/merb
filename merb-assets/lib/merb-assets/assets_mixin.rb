@@ -497,7 +497,7 @@ module Merb
       if (bundle_name = options[:bundle]) && Merb::Assets.bundle? && stylesheets.size > 1
         bundler = Merb::Assets::StylesheetAssetBundler.new(bundle_name, *stylesheets)
         bundled_asset = bundler.bundle!
-        return css_include_tag(bundled_asset)
+        return css_include_tag(bundled_asset, options.except(:bundle))
       end
 
       tags = ""

@@ -208,6 +208,15 @@ describe "External JavaScript and Stylesheets" do
     css_include_tag('style', :charset => 'iso-8859-1').should match(%r{charset="iso-8859-1"})
   end
 
+  it "should create a css include tag with the specified media when bundled" do
+    Merb.root = File.dirname(__FILE__) + '/fixture'
+    Merb::Config[:bundle_assets] = true
+    result = css_include_tag('master', 'application', :bundle => :screen, :media => 'screen,projection')
+    result.should match(%r{/stylesheets/screen.css})
+    result.should match(%r{media="screen,projection"})
+    Merb::Config[:bundle_assets] = false
+  end
+
   it "should return a uniq path for a single asset" do
     uniq_path("/javascripts/my.js").should ==
       "http://assets2.my-awesome-domain.com/javascripts/my.js"
