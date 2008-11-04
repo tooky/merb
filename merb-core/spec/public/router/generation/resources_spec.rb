@@ -113,6 +113,16 @@ describe "When generating URLs," do
         lambda { url(:user, :id => 1) }.should raise_error(Merb::Router::GenerationError)
       end
     end
+
+    it "uses resource name for named routes" do
+      Merb::Router.prepare do
+        resources :attachments, :controller => "file_attachments" do
+          member     :download, :method => :get
+        end
+      end
+
+      url(:download_attachment, :id => 9).should == "/attachments/9/download"
+    end
     
     it "should be able to specify the path of the resource" do
       Merb::Router.prepare do
