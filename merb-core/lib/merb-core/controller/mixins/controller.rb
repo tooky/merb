@@ -281,7 +281,7 @@ module Merb
     def nginx_send_file(path, content_type = "")
       # Let Nginx detect content type unless it is explicitly set
       headers['Content-Type']        = content_type
-      headers["Content-Disposition"] ||= "attachment; filename=#{path.split('/').last}"
+      headers["Content-Disposition"] ||= "attachment; filename=#{File.basename(path)}"
       
       headers['X-Accel-Redirect']    = path
       
