@@ -169,12 +169,12 @@ module Merb
     # @api public
     def send_file(file, opts={})
       opts.update(Merb::Const::DEFAULT_SEND_FILE_OPTIONS.merge(opts))
-      disposition = opts[:disposition].dup || 'attachment'
+      disposition = opts[:disposition].dup || DEFAULT_SEND_FILE_OPTIONS[:disposition]
       disposition << %(; filename="#{opts[:filename] ? opts[:filename] : File.basename(file)}")
       headers.update(
-        'Content-Type'              => opts[:type].strip,  # fixes a problem with extra '\r' with some browsers
-        'Content-Disposition'       => disposition,
-        'Content-Transfer-Encoding' => 'binary'
+        Merb::Const::CONTENT_TYPE              => opts[:type].strip,  # fixes a problem with extra '\r' with some browsers
+        Merb::Const::CONTENT_DISPOSITION       => disposition,
+        Merb::Const::CONTENT_TRANSFER_ENCODING => Merb::Const::BINARY
       )
       Proc.new do |response|
         file = File.open(file, 'rb')
@@ -202,12 +202,12 @@ module Merb
     # @api public
     def send_data(data, opts={})
       opts.update(Merb::Const::DEFAULT_SEND_FILE_OPTIONS.merge(opts))
-      disposition = opts[:disposition].dup || 'attachment'
+      disposition = opts[:disposition].dup || DEFAULT_SEND_FILE_OPTIONS[:disposition]
       disposition << %(; filename="#{opts[:filename]}") if opts[:filename]
       headers.update(
-        'Content-Type'              => opts[:type].strip,  # fixes a problem with extra '\r' with some browsers
-        'Content-Disposition'       => disposition,
-        'Content-Transfer-Encoding' => 'binary'
+        Merb::Const::CONTENT_TYPE              => opts[:type].strip,  # fixes a problem with extra '\r' with some browsers
+        Merb::Const::CONTENT_DISPOSITION       => disposition,
+        Merb::Const::CONTENT_TRANSFER_ENCODING => Merb::Const::BINARY
       )
       data
     end
@@ -238,14 +238,14 @@ module Merb
     # @api public
     def stream_file(opts={}, &stream)
       opts.update(Merb::Const::DEFAULT_SEND_FILE_OPTIONS.merge(opts))
-      disposition = opts[:disposition].dup || 'attachment'
+      disposition = opts[:disposition].dup || DEFAULT_SEND_FILE_OPTIONS[:disposition]
       disposition << %(; filename="#{opts[:filename]}")
       headers.update(
-        'Content-Type'              => opts[:type].strip,  # fixes a problem with extra '\r' with some browsers
-        'Content-Disposition'       => disposition,
-        'Content-Transfer-Encoding' => 'binary',
+        Merb::Const::CONTENT_TYPE              => opts[:type].strip,  # fixes a problem with extra '\r' with some browsers
+        Merb::Const::CONTENT_DISPOSITION       => disposition,
+        Merb::Const::CONTENT_TRANSFER_ENCODING => Merb::Const::BINARY,
         # Rack specification requires header values to respond to :each
-        'CONTENT-LENGTH'            => opts[:content_length].to_s
+        Merb::Const::CONTENT_LENGTH            => opts[:content_length].to_s
       )
       Proc.new do |response|
         stream.call(response)
@@ -278,14 +278,14 @@ module Merb
     # String:: precisely a single space.
     # 
     # @api public
-    def nginx_send_file(path, content_type = "")
+    def nginx_send_file(path, content_type = Merb::Const::EMPTY_STRING)
       # Let Nginx detect content type unless it is explicitly set
-      headers['Content-Type']        = content_type
-      headers["Content-Disposition"] ||= "attachment; filename=#{File.basename(path)}"
+      headers[Merb::Const::CONTENT_TYPE]        = content_type
+      headers[Merb::Const::CONTENT_DISPOSITION] ||= "attachment; filename=#{File.basename(path)}"
+      # X-Accel-Redirect
+      headers[Merb::Const::X_ACCEL_REDIRECT]    = path
       
-      headers['X-Accel-Redirect']    = path
-      
-      return ' '
+      return Merb::Const::SPACE
     end  
     
     # Sets a cookie to be included in the response.

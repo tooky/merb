@@ -21,6 +21,7 @@ module Merb
     }.freeze
 
     RACK_INPUT               = 'rack.input'.freeze
+    BINARY                   = 'binary'.freeze
     SET_COOKIE               = " %s=%s; path=/; expires=%s".freeze
     COOKIE_EXPIRATION_FORMAT = "%a, %d-%b-%Y %H:%M:%S GMT".freeze
     COOKIE_SPLIT             = /[;,] */n.freeze
@@ -49,6 +50,8 @@ module Merb
     POST                     = "POST".freeze
     HEAD                     = "HEAD".freeze
     CONTENT_LENGTH           = "CONTENT_LENGTH".freeze
+    CONTENT_DISPOSITION      = 'Content-Disposition'.freeze
+    CONTENT_TRANSFER_ENCODING = "Content-Transfer-Encoding".freeze
     HTTP_CLIENT_IP           = "HTTP_CLIENT_IP".freeze
     HTTP_X_REQUESTED_WITH    = "HTTP_X_REQUESTED_WITH".freeze
     HTTP_X_FORWARDED_FOR     = "HTTP_X_FORWARDED_FOR".freeze
@@ -83,6 +86,7 @@ module Merb
     REMOTE_ADDR              = "REMOTE_ADDR".freeze
     BREAK_TAG                = "<br/>".freeze
     EMPTY_STRING             = "".freeze
+    SPACE                    = " ".freeze
     NEWLINE                  = "\n".freeze
     SLASH                    = "/".freeze
     DOT                      = ".".freeze
@@ -90,6 +94,8 @@ module Merb
     DOUBLE_NEWLINE           = "\n\n".freeze
     LOCATION                 = "Location".freeze
     TEXT_SLASH_HTML          = "text/html".freeze
+
+    X_ACCEL_REDIRECT         = 'X-Accel-Redirect'.freeze
 
     WIN_PLATFORM_REGEXP      = /(:?mswin|mingw|cygwin)/.freeze
     JAVA_PLATFORM_REGEXP     = /java/.freeze
