@@ -67,7 +67,7 @@ module Merb
       #
       # ==== Examples
       #
-      # Merb::Router.root_behavior = Merb::Router.root_bavior.match("/hello")
+      # Merb::Router.root_behavior = Merb::Router.root_behavior.match("/hello")
       #
       # In the previous example, all routes will have the path prefix /hello.
       # It is important to note that this attribute must be set before any
@@ -165,7 +165,7 @@ module Merb
       alias_method :match, :match_before_compilation
       
       # There are three possible ways to use this method.  First, if you have a named route, 
-      # you can specify the route as the first parameter as a symbol and any paramters in a 
+      # you can specify the route as the first parameter as a symbol and any parameters in a
       # hash.  Second, you can generate the default route by just passing the params hash, 
       # just passing the params hash.  Finally, you can use the anonymous parameters.  This 
       # allows you to specify the parameters to a named route in the order they appear in the 
@@ -209,7 +209,7 @@ module Merb
       #
       # url(:controller => "articles", :action => "new")
       #
-      # Anonymous Paramters
+      # Anonymous Parameters
       #
       # Merb::Router.prepare do
       #   match("/articles/:year/:month/:title").to(:controller => :articles, :action => :show).name("articles")
@@ -276,7 +276,7 @@ module Merb
         route.generate(params, defaults, true)
       end
       
-      # Add functionality to the router. This can be in the form of
+      # Adds functionality to the router. This can be in the form of
       # including a new module or directly defining new methods.
       #
       # ==== Parameters

@@ -46,7 +46,7 @@ module Merb
         self.new(Merb::SessionMixin.rand_uuid, "", Merb::Request._session_secret_key)
       end
       
-      # Set up a new session on request: make it available on request instance.
+      # Sets up a new session on request: make it available on request instance.
       #
       # ==== Parameters
       # request<Merb::Request>:: The Merb::Request that came in from Rack.
@@ -102,14 +102,14 @@ module Merb
       end
     end
     
-    # Regenerate the session_id.
+    # Regenerates the session_id.
     # 
     # @api private
     def regenerate
       self.session_id = Merb::SessionMixin.rand_uuid
     end
     
-    # Create the raw cookie string; includes an HMAC keyed message digest.
+    # Creates the raw cookie string; includes an HMAC keyed message digest.
     #
     # ==== Returns
     # String:: Cookie value.
@@ -138,7 +138,7 @@ module Merb
     
     private
     
-    # Generate the HMAC keyed message digest. Uses SHA1.
+    # Generates the HMAC keyed message digest. Uses SHA1.
     # 
     # ==== Returns
     # String:: an HMAC digest of the cookie data.
@@ -178,7 +178,7 @@ module Merb
     
     protected
     
-    # Serialize current session data as a Hash.
+    # Serializes current session data as a Hash.
     # Uses Base64 encoding for integrity.
     # 
     # ==== Returns
@@ -189,7 +189,7 @@ module Merb
       Base64.encode64(Marshal.dump(self.to_hash)).chop
     end
     
-    # Unserialize the raw cookie data to a Hash
+    # Unserializes the raw cookie data to a Hash
     # 
     # ==== Returns
     # Hash:: the session hash Base64 decoded from the data dump.

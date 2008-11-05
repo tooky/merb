@@ -126,7 +126,7 @@ module Merb
         # name<~to_sym>:: Name of the session type to register.
         # class_name<String>:: The corresponding class name.
         #
-        # === Notres
+        # ==== Notes
         # This is automatically called when Merb::SessionContainer is subclassed.
         # 
         # @api private
@@ -158,7 +158,7 @@ module Merb
       # session_store<String>:: The type of session store to access,
       # defaults to default_session_store.
       #
-      # === Notes
+      # ==== Notes
       # If no suitable session store type is given, it defaults to
       # cookie-based sessions.
       # 
@@ -185,7 +185,7 @@ module Merb
       # ==== Parameters
       # new_session<Merb::SessionContainer>:: A session store instance.
       #
-      # === Notes
+      # ==== Notes
       # The session is assigned internally by its session_store_type key.
       # 
       # @api private
@@ -219,7 +219,7 @@ module Merb
       end
       alias :finalize_sessions :finalize_session
       
-      # Assign default cookie values
+      # Assigns default cookie values
       # 
       # @api private
       def default_cookies

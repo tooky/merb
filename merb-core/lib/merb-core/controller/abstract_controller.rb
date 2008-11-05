@@ -124,6 +124,7 @@ class Merb::AbstractController
 
   # ==== Returns
   # String:: The controller name in path form, e.g. "admin/items".
+  #
   # @api public
   def self.controller_name() @controller_name ||= self.name.to_const_path end
 
@@ -168,7 +169,9 @@ class Merb::AbstractController
     controller ? "#{controller}/#{context}" : context
   end
 
-  # The location to look for a template - override this method for particular behaviour. 
+  # ==== Returns
+  # String::
+  #   The location to look for a template - override this method for particular behaviour.
   #
   # ==== Parameters
   # template<String>:: The absolute path to a template - without template extension.
@@ -193,7 +196,7 @@ class Merb::AbstractController
     _reset_template_roots
   end
 
-  # Reset the template root based on the @_template_root ivar.
+  # Resets the template root based on the @_template_root ivar.
   #
   # @api private
   def self._reset_template_roots
@@ -221,7 +224,7 @@ class Merb::AbstractController
   end
   
   # Returns the list of classes that have specifically subclassed AbstractController.  
-  # Does not include all decendents.  
+  # Does not include all descendants.
   #
   # ==== Returns
   # Set:: The subclasses.
@@ -245,6 +248,7 @@ class Merb::AbstractController
   end    
   
   # This will initialize the controller, it is designed to be overridden in subclasses (like MerbController)
+  #
   # ==== Parameters
   # *args:: The args are ignored in this class, but we need this so that subclassed initializes can have parameters
   #
@@ -348,7 +352,7 @@ class Merb::AbstractController
     return :filter_chain_completed
   end
 
-  # Determine whether the filter should be called for the current action using :only and :exclude.
+  # Determines whether the filter should be called for the current action using :only and :exclude.
   #
   # ==== Parameters
   # rule<Hash>:: Rules for the filter (see below).
@@ -423,6 +427,7 @@ class Merb::AbstractController
   end
 
   # Adds a filter to the after filter chain
+  #
   # ==== Parameters
   # filter<Symbol, Proc>:: The filter to add. Defaults to nil.
   # opts<Hash>::
@@ -522,7 +527,7 @@ class Merb::AbstractController
   #
   # url(:controller => "articles", :action => "new")
   #
-  # Anonymous Paramters
+  # Anonymous Parameters
   #
   # Merb::Router.prepare do
   #   match("/articles/:year/:month/:title").to(:controller => :articles, :action => :show).name("articles")
@@ -627,6 +632,7 @@ class Merb::AbstractController
 
   private
   # adds a filter to the specified filter chain
+  #
   # ==== Parameters
   # filters<Array[Filter]>:: The filter chain that this should be added to.
   # filter<Filter>:: A filter that should be added.
@@ -673,8 +679,8 @@ class Merb::AbstractController
     end
   end  
 
-  # Skip a filter that was previously added to the filter chain. Useful in
-  # inheritence hierarchies.
+  # Skips a filter that was previously added to the filter chain. Useful in
+  # inheritance hierarchies.
   #
   # ==== Parameters
   # filters<Array[Filter]>:: The filter chain that this should be removed from.

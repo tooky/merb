@@ -2,7 +2,7 @@ module Merb
   module Rack
     class Console
       # There are three possible ways to use this method.  First, if you have a named route, 
-      # you can specify the route as the first parameter as a symbol and any paramters in a 
+      # you can specify the route as the first parameter as a symbol and any parameters in a
       # hash.  Second, you can generate the default route by just passing the params hash, 
       # just passing the params hash.  Finally, you can use the anonymous parameters.  This 
       # allows you to specify the parameters to a named route in the order they appear in the 
@@ -46,7 +46,7 @@ module Merb
       #
       # url(:controller => "articles", :action => "new")
       #
-      # Anonymous Paramters
+      # Anonymous Parameters
       #
       # Merb::Router.prepare do
       #   match("/articles/:year/:month/:title").to(:controller => :articles, :action => :show).name("articles")
@@ -111,7 +111,7 @@ module Merb
         puts "Modifications have been rolled back"
       end
 
-      # Explictly show logger output during IRB session
+      # Explicitly show logger output during IRB session
       def trace_log!
         Merb.logger.auto_flush = true
       end

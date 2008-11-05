@@ -58,7 +58,7 @@ module Merb::Test::Rspec::ControllerMatchers
 
   class Provide
 
-    # === Parameters
+    # ==== Parameters
     # expected<Symbol>:: A format to check
     def initialize(expected)
       @expected = expected
@@ -96,7 +96,7 @@ module Merb::Test::Rspec::ControllerMatchers
   
   # Passes if the controller actually provides the target format
   #
-  # === Parameters
+  # ==== Parameters
   # expected<Symbol>:: A format to check
   #
   # ==== Examples

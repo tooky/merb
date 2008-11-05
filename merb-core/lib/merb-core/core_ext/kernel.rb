@@ -8,13 +8,15 @@ end
 
 module Kernel
   
-  # Keep track of all required dependencies. 
+  # Keeps track of all required dependencies.
   #
-  # @param name<String> The name of the gem to load.
-  # @param *ver<Gem::Requirement, Gem::Version, Array, #to_str>
+  # ==== Parameters
+  # name<String>:: The name of the gem to load.
+  # *ver<Gem::Requirement, Gem::Version, Array, #to_str>
   #   Version requirements to be passed to Gem::Dependency.new.
   #
-  # @return <Gem::Dependency> Dependency information
+  # ==== Returns
+  # Gem::Dependency:: The dependency information.
   #
   # @api private
   def track_dependency(name, *ver, &blk)
@@ -67,16 +69,17 @@ module Kernel
   # off to the system gems (so if you have a lower version of a gem in
   # ROOT/gems, it'll still get loaded).
   #
-  # @param name<String,Gem::Dependency> 
-  #   The name or dependency object of the gem to load.
-  # @param *ver<Gem::Requirement, Gem::Version, Array, #to_str>
+  # ==== Parameters
+  # name<String> The name or dependency object of the gem to load.
+  # *ver<Gem::Requirement, Gem::Version, Array, #to_str>
   #   Version requirements to be passed to Gem.activate.
   #
-  # @note
-  #   If the gem cannot be found, the method will attempt to require the string
-  #   as a library.
+  # ==== Notes
+  # If the gem cannot be found, the method will attempt to require the string
+  # as a library.
   #
-  # @return <Gem::Dependency> The dependency information.
+  # ==== Returns
+  # Gem::Dependency:: The dependency information.
   #
   # @api private
   def load_dependency(name, *ver, &blk)
@@ -124,18 +127,20 @@ module Kernel
 
   # Loads both gem and library dependencies that are passed in as arguments.
   #
-  # @param *args<String, Hash, Array> The dependencies to load.
+  # ==== Parameters
+  # *args<String, Hash, Array>:: The dependencies to load.
   #
-  # @note
-  #   Each argument can be:
+  # ==== Notes
+  # Each argument can be:
   #   String:: Single dependency.
   #   Hash::
   #     Multiple dependencies where the keys are names and the values versions.
   #   Array:: Multiple string dependencies.
   #
-  # @example dependencies "RedCloth"                 # Loads the the RedCloth gem
-  # @example dependencies "RedCloth", "merb_helpers" # Loads RedCloth and merb_helpers
-  # @example dependencies "RedCloth" => "3.0"        # Loads RedCloth 3.0
+  # ==== Examples
+  # dependencies "RedCloth"                 # Loads the the RedCloth gem
+  # dependencies "RedCloth", "merb_helpers" # Loads RedCloth and merb_helpers
+  # dependencies "RedCloth" => "3.0"        # Loads RedCloth 3.0
   #
   # @api private
   def load_dependencies(*args)
@@ -150,8 +155,9 @@ module Kernel
 
   # Does a basic require, and prints a message if an error occurs.
   #
-  # @param library<to_s> The library to attempt to include.
-  # @param message<String> The error to add to the log upon failure. Defaults to nil.
+  # ==== Parameters
+  # library<to_s>:: The library to attempt to include.
+  # message<String>:: The error to add to the log upon failure. Defaults to nil.
   #
   # @api private
   # @deprecated
@@ -260,38 +266,42 @@ module Kernel
   end
 
 
-  # @param i<Fixnum> The caller number. Defaults to 1.
+  # ==== Parameters
+  # i<Fixnum>:: The caller number. Defaults to 1.
   #
-  # @return <Array[Array]> The file, line and method of the caller.
+  # ==== Returns
+  # <Array[Array]>:: The file, line and method of the caller.
   #
-  # @example
-  #   __caller_info__(1)
-  #     # => ['/usr/lib/ruby/1.8/irb/workspace.rb', '52', 'irb_binding']
+  # ==== Example
+  # __caller_info__(1)
+  #   # => ['/usr/lib/ruby/1.8/irb/workspace.rb', '52', 'irb_binding']
   #
   # @api private
   def __caller_info__(i = 1)
     file, line, meth = caller[i].scan(/(.*?):(\d+):in `(.*?)'/).first
   end
 
-  # @param file<String> The file to read.
-  # @param line<Fixnum> The line number to look for.
-  # @param size<Fixnum>
+  # ==== Parameters
+  # file<String>:: The file to read.
+  # line<Fixnum>:: The line number to look for.
+  # size<Fixnum>
   #   Number of lines to include above and below the the line to look for.
   #   Defaults to 4.
   #
-  # @return <Array[Array]>
+  # ==== Returns
+  # <Array[Array]>
   #   Triplets containing the line number, the line and whether this was the
   #   searched line.
   #
-  # @example
-  #   __caller_lines__('/usr/lib/ruby/1.8/debug.rb', 122, 2) # =>
-  #     [
-  #       [ 120, "  def check_suspend",                               false ],
-  #       [ 121, "    return if Thread.critical",                     false ],
-  #       [ 122, "    while (Thread.critical = true; @suspend_next)", true  ],
-  #       [ 123, "      DEBUGGER__.waiting.push Thread.current",      false ],
-  #       [ 124, "      @suspend_next = false",                       false ]
-  #     ]
+  # ==== Example
+  # __caller_lines__('/usr/lib/ruby/1.8/debug.rb', 122, 2) # =>
+  #   [
+  #     [ 120, "  def check_suspend",                               false ],
+  #     [ 121, "    return if Thread.critical",                     false ],
+  #     [ 122, "    while (Thread.critical = true; @suspend_next)", true  ],
+  #     [ 123, "      DEBUGGER__.waiting.push Thread.current",      false ],
+  #     [ 124, "      @suspend_next = false",                       false ]
+  #   ]
   #
   # @api private
   def __caller_lines__(file, line, size = 4)
@@ -323,28 +333,29 @@ module Kernel
   # Takes a block, profiles the results of running the block
   # specified number of times and generates HTML report.
   #
-  # @param name<#to_s>
+  # ==== Parameters
+  # name<#to_s>
   #   The file name. The result will be written out to
   #   Merb.root/"log/#{name}.html".
-  # @param min<Fixnum>
+  # min<Fixnum>
   #   Minimum percentage of the total time a method must take for it to be
   #   included in the result. Defaults to 1.
   #
-  # @return <String>
-  #   The result of the profiling.
+  # ==== Returns
+  # <String>:: The result of the profiling.
   #
-  # @note
-  #   Requires ruby-prof (<tt>sudo gem install ruby-prof</tt>)
+  # ==== Note
+  # Requires ruby-prof (<tt>sudo gem install ruby-prof</tt>)
   #
-  # @example
-  #   __profile__("MyProfile", 5, 30) do
-  #     rand(10)**rand(10)
-  #     puts "Profile run"
-  #   end
+  # ==== Example
+  # __profile__("MyProfile", 5, 30) do
+  #   rand(10)**rand(10)
+  #   puts "Profile run"
+  # end
   #
-  #   Assuming that the total time taken for #puts calls was less than 5% of the
-  #   total time to run, #puts won't appear in the profile report.
-  #   The code block will be run 30 times in the example above.
+  # Assuming that the total time taken for #puts calls was less than 5% of the
+  # total time to run, #puts won't appear in the profile report.
+  # The code block will be run 30 times in the example above.
   #
   # @api private
   def __profile__(name, min=1, iter=100)
@@ -365,13 +376,14 @@ module Kernel
   # Extracts an options hash if it is the last item in the args array. Used
   # internally in methods that take *args.
   #
-  # @param args<Array> The arguments to extract the hash from.
+  # ==== Parameters
+  # args<Array>:: The arguments to extract the hash from.
   #
-  # @example
-  #   def render(*args,&blk)
-  #     opts = extract_options_from_args!(args) || {}
-  #     # [...]
-  #   end
+  # ==== Example
+  # def render(*args,&blk)
+  #   opts = extract_options_from_args!(args) || {}
+  #   # [...]
+  # end
   #
   # @api public
   def extract_options_from_args!(args)
@@ -385,12 +397,13 @@ module Kernel
 
   # Checks that the given objects quack like the given conditions.
   #
-  # @param opts<Hash>
+  # ==== Parameters
+  # opts<Hash>
   #   Conditions to enforce. Each key will receive a quacks_like? call with the
   #   value (see Object#quacks_like? for details).
   #
-  # @raise <ArgumentError>
-  #   An object failed to quack like a condition.
+  # ==== Raises
+  # <ArgumentError>:: An object failed to quack like a condition.
   #
   # @api public
   def enforce!(opts = {})
@@ -401,7 +414,7 @@ module Kernel
 
   unless Kernel.respond_to?(:debugger)
 
-    # Define debugger method so that code even works if debugger was not
+    # Defines debugger method so that code even works if debugger was not
     # requested. Drops a note to the logs that Debugger was not available.
     def debugger
       Merb.logger.info! "\n***** Debugger requested, but was not " +

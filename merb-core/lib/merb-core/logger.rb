@@ -11,6 +11,7 @@ class Merb::Logger < Extlib::Logger
 end
 
 # require "time" # httpdate
+#
 # ==== Public Merb Logger API
 #
 # To replace an existing logger with a new one:
@@ -121,7 +122,7 @@ module Merb
       end
     end
 
-    # Close and remove the current log object.
+    # Closes and removes the current log object.
     def close
       flush
       @log.close if @log.respond_to?(:close) && !@log.tty?
@@ -148,7 +149,7 @@ module Merb
     end
     alias :push :<<
 
-    # Generate the logging methods for Merb.logger for each log level.
+    # Generates the logging methods for Merb.logger for each log level.
     Levels.each_pair do |name, number|
       class_eval <<-LEVELMETHODS, __FILE__, __LINE__
 

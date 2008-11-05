@@ -58,7 +58,7 @@ module Merb
         session
       end
       
-      # Setup a new session or retreive an existing session.
+      # Setups a new session or retrieves an existing session.
       # 
       # ==== Parameters
       # request<Merb::Request>:: The Merb::Request that came in from Rack.

@@ -29,7 +29,7 @@ module Merb
       end
 
       # Determines whether this request is a "deferred_action", usually a long request. 
-      # Rack uses this method to detemine whether to use an evented request or a deferred 
+      # Rack uses this method to determine whether to use an evented request or a deferred
       # request in evented rack handlers.  
       #
       # ==== Parameters

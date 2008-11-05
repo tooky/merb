@@ -5,7 +5,7 @@ module Merb::RenderMixin
   # ==== Parameters
   # base<Module>:: Module that is including RenderMixin (probably a controller)
   #
-  # @private
+  # @api private
   def self.included(base)
     base.extend(ClassMethods)
     base.class_eval do
@@ -15,7 +15,7 @@ module Merb::RenderMixin
 
   module ClassMethods
 
-    # Return the default render options.
+    # Returns the default render options.
     #
     # ==== Returns
     # Hash:: An options hash
@@ -25,7 +25,7 @@ module Merb::RenderMixin
       self._default_render_options ||= {}
     end
 
-    # Set default render options at the class level.
+    # Sets default render options at the class level.
     #
     # ==== Parameters
     # opts<Hash>:: An options hash
@@ -35,7 +35,7 @@ module Merb::RenderMixin
       self._default_render_options = opts
     end
 
-    # Set the default layout to use or nil/false to disable layout rendering.
+    # Sets the default layout to use or nil/false to disable layout rendering.
     # This is a shortcut for render_options :layout => false.
     #
     # ==== Parameters
@@ -52,7 +52,7 @@ module Merb::RenderMixin
       self.default_render_options.update(:layout => (layout || false))
     end
 
-    # Enable the default layout logic - reset the layout option.
+    # Enables the default layout logic - resets the layout option.
     #
     # ==== Returns
     # ~to_s:: The layout that was previously set.
@@ -64,7 +64,7 @@ module Merb::RenderMixin
 
   end
 
-  # Render the specified item, with the specified options.
+  # Renders the specified item, with the specified options.
   #
   # ==== Parameters
   # thing<String, Symbol, nil>::
@@ -239,7 +239,7 @@ module Merb::RenderMixin
     meth ? send(meth) : catch_content(:for_layout)
   end
 
-  # Render a partial template.
+  # Renders a partial template.
   #
   # ==== Parameters
   # template<~to_s>::
@@ -328,7 +328,7 @@ module Merb::RenderMixin
     sent_template
   end
 
-  # Take the options hash and handle it as appropriate.
+  # Takes the options hash and handles it as appropriate.
   #
   # ==== Parameters
   # opts<Hash>:: The options hash that was passed into render.
@@ -347,7 +347,7 @@ module Merb::RenderMixin
     opts
   end
 
-  # Get the layout that should be used. The content-type will be appended to
+  # Gets the layout that should be used. The content-type will be appended to
   # the layout unless the layout already contains a "." in it.
   #
   # If no layout was passed in, this method will look for one with the same
@@ -388,7 +388,7 @@ module Merb::RenderMixin
     end
   end
 
-  # Iterate over the template roots in reverse order, and return the template
+  # Iterates over the template roots in reverse order, and returns the template
   # and template location of the first match.
   #
   # ==== Parameters
@@ -432,11 +432,11 @@ module Merb::RenderMixin
     [template_method, template_location.to_s]
   end
   
-  # Return the template method for a location, and check to make sure the current controller
+  # Returns the template method for a location, and checks to make sure the current controller
   # actually responds to the method.
   #
   # ==== Parameters
-  # template_location<String>:: The phyical path of the template
+  # template_location<String>:: The physical path of the template
   # locals<Array[Symbol]>:: A list of locals to assign from the args passed into the compiled template.
   #
   # ==== Returns

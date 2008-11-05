@@ -209,7 +209,7 @@ module Merb::Helpers::Form::Builder
     #
     # ==== Options
     # +selected+:: The value of a selected object, which may be either a string or an array.
-    # +prompt+:: Adds an addtional option tag with the provided string with no value.
+    # +prompt+:: Adds an additional option tag with the provided string with no value.
     # +include_blank+:: Adds an additional blank option tag with no value.
     #
     # ==== Returns

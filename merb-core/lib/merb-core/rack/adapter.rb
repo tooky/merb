@@ -5,7 +5,8 @@ module Merb
     class Adapter
 
       class << self
-        # Get a rack adapter by id. 
+        # Gets a rack adapter by id.
+        #
         # ==== Parameters
         # id<String>:: The identifier of the Rack adapter class to retrieve.
         #

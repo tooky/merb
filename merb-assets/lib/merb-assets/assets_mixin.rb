@@ -525,6 +525,7 @@ module Merb
     # ==== Returns
     # Array:: Full unique paths to assets OR
     # String:: if only a single path is requested
+    #
     # ==== Examples
     #  uniq_path("/javascripts/my.js","/javascripts/my.css")
     #  #=> ["http://assets2.my-awesome-domain.com/javascripts/my.js", "http://assets1.my-awesome-domain.com/javascripts/my.css"]
@@ -555,6 +556,7 @@ module Merb
     # ==== Returns
     # Array:: Full unique paths to assets OR
     # String:: if only a single path is requested
+    #
     # ==== Examples
     #  uniq_js_path("my")
     #  #=> "http://assets2.my-awesome-domain.com/javascripts/my.js"
@@ -577,6 +579,7 @@ module Merb
     # ==== Returns
     # Array:: Full unique paths to assets OR
     # String:: if only a single path is requested
+    #
     # ==== Examples
     #  uniq_css_path("my")
     #  #=> "http://assets2.my-awesome-domain.com/stylesheets/my.css"
@@ -599,6 +602,7 @@ module Merb
     # ==== Returns
     # Array:: Full unique paths to assets OR
     # String:: if only a single path is requested
+    #
     # ==== Examples
     #  uniq_js_tag("my")
     #  #=> <script type="text/javascript" src="http://assets2.my-awesome-domain.com/javascripts/my.js"></script>
@@ -613,6 +617,7 @@ module Merb
     # ==== Returns
     # Array:: Full unique paths to assets OR
     # String:: if only a single path is requested
+    #
     # ==== Examples
     #  uniq_css_tag("my")
     #  #=> <link href="http://assets2.my-awesome-domain.com/stylesheets/my.css" type="text/css" />

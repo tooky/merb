@@ -6,7 +6,7 @@ module Merb
   class Server
     class << self
 
-      # Start a Merb server, in either foreground, daemonized or cluster mode.
+      # Starts a Merb server, in either foreground, daemonized or cluster mode.
       #
       # ==== Parameters
       # port<~to_i>::
@@ -183,7 +183,7 @@ module Merb
         exit(status)
       end
 
-      # Change process user/group to those specified in Merb::Config.
+      # Changes process user/group to those specified in Merb::Config.
       #
       # @api private
       def change_privilege
@@ -238,7 +238,7 @@ module Merb
         store_details(port)
       end
 
-      # Delete the pidfile for the specified port/socket.
+      # Deletes the pidfile for the specified port/socket.
       #
       # @api private
       def remove_pid(port)
@@ -251,7 +251,7 @@ module Merb
       #
       # ==== Parameters
       # port<~to_s>::
-      #   The port of the Merb process to whom the the PID file belongs to.
+      #   The port of the Merb process to whom the PID file belongs to.
       #
       # ==== Alternatives
       # If Merb::Config[:pid_file] has been specified, that will be used
@@ -278,7 +278,7 @@ module Merb
       #
       # ==== Parameters
       # port<~to_s>::
-      #   The port/socket of the Merb process to whom the the PID file belongs to.
+      #   The port/socket of the Merb process to whom the PID file belongs to.
       #
       # ==== Returns
       # String::
@@ -291,7 +291,7 @@ module Merb
         pidfile % port
       end
 
-      # Get a list of the pid files.
+      # Gets a list of the pid files.
       #
       # ==== Returns
       # Array::
@@ -310,7 +310,7 @@ module Merb
         end
        end
 
-      # Change privileges of the process to the specified user and group.
+      # Changes privileges of the process to the specified user and group.
       #
       # ==== Parameters
       # user<String>:: The user to change the process to.

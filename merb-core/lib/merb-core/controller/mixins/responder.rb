@@ -193,7 +193,7 @@ module Merb
     # Array[Symbol]::
     #   The current list of formats provided for this instance of the
     #   controller. It starts with what has been set in the controller (or
-    #   :html by default) but can be modifed on a per-action basis.      
+    #   :html by default) but can be modified on a per-action basis.
     #
     # @api private
     def _provided_formats
@@ -210,7 +210,7 @@ module Merb
     #
     # ==== Raises
     # Merb::ResponderMixin::ContentTypeAlreadySet::
-    #   Content negotiation already occured, and the content_type is set.
+    #   Content negotiation already occurred, and the content_type is set.
     #
     # ==== Returns
     # Array[Symbol]:: List of formats passed in.
@@ -363,7 +363,7 @@ module Merb
     # ==== Returns
     # Array[AcceptType]:: The accepted types.
     #
-    # @private
+    # @api private
     def self.parse(accept_header)
       headers = accept_header.split(/,/)
       idx, list = 0, []

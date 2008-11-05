@@ -11,16 +11,15 @@ module DateAndTimeFormatting
   module InstanceMethods
     
     
-    # Format a date/time instance using a defined format
+    # Formats a date/time instance using a defined format
     #
     # ==== Parameters
     # format<Symbol>:: of the format key from Date.date_formats
     #
     # ==== Returns
-    # String:: formattred string
+    # String:: formatted string
     # 
-    #--
-    # @public
+    # @api public
     def formatted(format = :default)
       self.strftime(Date.formats[format])
     end
@@ -42,8 +41,8 @@ module DateAndTimeFormatting
     #
     # ==== Returns
     # Hash:: a hash with all formats available
-    # --
-    # @public
+    #
+    # @api public
     def formats
       @@formats
     end
@@ -56,16 +55,16 @@ module DateAndTimeFormatting
     #
     # ==== Returns
     # Hash:: a hash with all formats available
-    # --
-    # @public
+    #
+    # @api public
     def add_format(key, format)
       formats.merge!({key => format})
     end
     
     
     # Resets the date and time formats
-    # --
-    # @private
+    #
+    # @api private
     def reset_formats
       original_formats = [:db, :time, :short, :date, :long, :long_ordinal, :rfc822]
       formats = @@formats.delete_if{|format, v| !original_formats.include?(format)}
@@ -79,7 +78,7 @@ module Ordinalize
   # Ordinalize turns a number into an ordinal string used to denote the
   # position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
   #
-  # Examples
+  # ==== Examples
   #   1.ordinalize     # => "1st"
   #   2.ordinalize     # => "2nd"
   #   1002.ordinalize  # => "1002nd"
@@ -113,7 +112,7 @@ module OrdinalizedFormatting
   # Gives you a relative date in an attractive format
   #
   # ==== Parameters
-  # format<String>:: strftime string used to formatt a time/date object
+  # format<String>:: strftime string used to format a time/date object
   # locale<String, Symbol>:: An optional value which can be used by localization plugins
   #
   # ==== Returns

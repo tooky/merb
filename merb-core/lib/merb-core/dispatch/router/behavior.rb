@@ -13,7 +13,7 @@ module Merb
       # @api private
       class Proxy
         
-        # Undefine as many methods as possible so that everything can be proxied
+        # Undefines as many methods as possible so that everything can be proxied
         # along to the behavior
         instance_methods.each { |m| undef_method m unless %w[ __id__ __send__ class kind_of? respond_to? assert_kind_of should should_not instance_variable_set instance_variable_get instance_eval].include?(m) }
         
@@ -72,7 +72,7 @@ module Merb
         # == These methods are to be used in defer_to blocks
         
         # There are three possible ways to use this method.  First, if you have a named route, 
-        # you can specify the route as the first parameter as a symbol and any paramters in a 
+        # you can specify the route as the first parameter as a symbol and any parameters in a
         # hash.  Second, you can generate the default route by just passing the params hash, 
         # just passing the params hash.  Finally, you can use the anonymous parameters.  This 
         # allows you to specify the parameters to a named route in the order they appear in the 
@@ -116,7 +116,7 @@ module Merb
         #
         # url(:controller => "articles", :action => "new")
         #
-        # Anonymous Paramters
+        # Anonymous Parameters
         #
         # Merb::Router.prepare do
         #   match("/articles/:year/:month/:title").to(:controller => :articles, :action => :show).name("articles")
@@ -630,11 +630,12 @@ module Merb
         self
       end
       
-      # Capture any new routes that have been added within the block.
+      # Captures any new routes that have been added within the block.
       #
       # This utility method lets you track routes that have been added;
       # it doesn't affect how/which routes are added.
       #
+      # ==== Parameters
       # &block:: A context in which routes are generated.
       # 
       # @api public
@@ -654,7 +655,7 @@ module Merb
         captured_routes
       end
       
-      # Proxy routes with the default behaviors.
+      # Proxies routes with the default behaviors.
       # 
       # ==== Parameters
       # &block:: defines routes within the provided context.
@@ -719,7 +720,7 @@ module Merb
       # Allows to insert the route at a certain spot in the list of routes
       # instead of appending to the list.
       # 
-      # ==== Params
+      # ==== Parameters
       # route<Route>:: the route to insert before.
       # &block:: the route definition to insert.
       # 
@@ -745,7 +746,7 @@ module Merb
       # Creates a new context with a given behavior for the route definition in
       # the block.
       # 
-      # ==== Params
+      # ==== Parameters
       # behavior<Behavior>:: the behavior to proxy the calls in the block.
       # &block:: the routing definitions to be nested within the behavior.
       # 

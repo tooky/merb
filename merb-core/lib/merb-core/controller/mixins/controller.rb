@@ -2,8 +2,8 @@ module Merb
   # Module that is mixed in to all implemented controllers.
   module ControllerMixin
     
-    # Enqueu a block to run in a background thread outside of the request
-    # response dispatch
+    # Enqueues a block to run in a background thread outside of the request
+    # response dispatch.
     # 
     # ==== Parameters
     # &blk:: proc to run later
@@ -142,7 +142,7 @@ module Merb
       "<html><body>You are being <a href=\"#{url}\">redirected</a>.</body></html>"
     end
     
-    # Retreives the redirect message either locally or from the request.
+    # Retrieves the redirect message either locally or from the request.
     # 
     # @api public
     def message
@@ -192,7 +192,7 @@ module Merb
       end
     end
     
-    # Send binary data over HTTP to the user as a file download. May set content type,
+    # Sends binary data over HTTP to the user as a file download. May set content type,
     # apparent file name, and specify whether to show data inline or download as an attachment.
     # 
     # ==== Parameters

@@ -87,7 +87,7 @@ module Merb
   # Note: All standard ControllerExceptions have an HTTP status code associated 
   # with them which is sent to the browser when the action is rendered.
   #
-  # Note: If you do not specifiy how to handle raised ControllerExceptions 
+  # Note: If you do not specify how to handle raised ControllerExceptions
   # or an unhandlable exception occurs within your customised exception action
   # then they will be rendered using the built-in error template.
   # In development mode this "built in" template will show stack-traces for
@@ -152,14 +152,14 @@ module Merb
 
     class Base < StandardError #:doc:
 
-      # === Returns
+      # ==== Returns
       # Integer:: The status-code of the error.
       def status; self.class.status; end
       alias :to_i :status
 
       class << self
 
-        # Get the actual status-code for an Exception class.
+        # Gets the actual status-code for an Exception class.
         #
         # As usual, this can come from a constant upwards in
         # the inheritance chain.
@@ -173,7 +173,7 @@ module Merb
         end
         alias :to_i :status
         
-        # Set the actual status-code for an Exception class.
+        # Sets the actual status-code for an Exception class.
         #
         # If possible, set the STATUS constant, and update
         # any previously registered (inherited) status-code.
@@ -209,7 +209,6 @@ module Merb
         # it goes all the way down the chain of inheritance.
         #
         # ==== Parameters
-        # 
         # subclass<Merb::ControllerExceptions::Base>::
         #   The Exception class that is inheriting from Merb::ControllerExceptions::Base
         #
@@ -222,7 +221,7 @@ module Merb
         
         private
         
-        # Register the status-code for an Exception class.
+        # Registers the status-code for an Exception class.
         #
         # ==== Parameters
         # num<~to_i>:: The status code
@@ -337,6 +336,7 @@ module Merb
   
   # Required to show exceptions in the log file
   #
+  # ==== Parameters
   # e<Exception>:: The exception that a message is being generated for
   def self.exception(e)
     "#{ e.message } - (#{ e.class })\n" <<  

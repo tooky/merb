@@ -1,4 +1,5 @@
-# Provides a a simple way of calling time units and to see the elapsed time between 2 moments
+# Provides a simple way of calling time units and to see the elapsed time between 2 moments
+#
 # ==== Examples
 #   142.minutes => returns a value in seconds
 #   7.days => returns a value in seconds

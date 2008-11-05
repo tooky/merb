@@ -10,7 +10,7 @@ module Merb
     
     class << self
       
-      # Register the subclass as an available session store type.
+      # Registers the subclass as an available session store type.
       def inherited(klass)
         self.subclasses << klass.to_s
         super
@@ -49,7 +49,7 @@ module Merb
       self.session_id = session_id
     end
     
-    # Assign a new session_id.
+    # Assigns a new session_id.
     #
     # Recreates the cookie with the default expiration time. Useful during log
     # in for pushing back the expiration date.

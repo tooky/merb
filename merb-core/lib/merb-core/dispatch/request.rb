@@ -24,7 +24,7 @@ module Merb
     cattr_accessor :http_method_overrides
     self.http_method_overrides = []
 
-    # Initialize the request object.
+    # Initializes the request object.
     #
     # ==== Parameters
     # http_request<~params:~[], ~body:IO>::
@@ -103,7 +103,7 @@ module Merb
     end
 
     # ==== Notes
-    # Find route using requested URI and merges route
+    # Finds route using requested URI and merges route
     # parameters (:action, :controller and named segments)
     # into request params hash.
     #
@@ -561,7 +561,7 @@ module Merb
 
     # ==== Parameters
     # tld_length<Fixnum>::
-    #   Number of domains levels to inlclude in the top level domain. Defaults
+    #   Number of domains levels to include in the top level domain. Defaults
     #   to 1.
     #
     # ==== Returns
@@ -575,7 +575,7 @@ module Merb
 
     # ==== Parameters
     # tld_length<Fixnum>::
-    #   Number of domains levels to inlclude in the top level domain. Defaults
+    #   Number of domains levels to include in the top level domain. Defaults
     #   to 1.
     #
     # ==== Returns

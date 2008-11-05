@@ -1,7 +1,7 @@
 module MerbExceptions
   module ExceptionsHelper
     protected
-    # if you need to handle the render yourself for some reason, you can call
+    # If you need to handle the render yourself for some reason, you can call
     # this method directly. It sends notifications without any rendering logic.
     # Note though that if you are sending lots of notifications this could
     # delay sending a response back to the user so try to avoid using it

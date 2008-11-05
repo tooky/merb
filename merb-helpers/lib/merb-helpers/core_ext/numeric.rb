@@ -67,9 +67,9 @@ class Numeric
            }
     }
     
-    # accessor for @formats
-    #---
-    # @private
+    # Accessor for @formats
+    #
+    # @api private
     def self.formats
       @formats
     end
@@ -79,8 +79,7 @@ class Numeric
     
     # Accessor for the default format in use
     #
-    #---
-    # @public
+    # @api public
     def self.default_format
       @default_format
     end
@@ -94,8 +93,7 @@ class Numeric
     # ==== Returns
     # Hash:: a hash representing the default format
     #
-    #---
-    # @public
+    # @api public
     def self.change_default_format(format_code)
       @default_format = (formats[format_code] || default_format)
     end
@@ -106,11 +104,7 @@ class Numeric
     # ==== Parameters
     # format <Hash>:: format defining how to transform numeric values
     #
-    # ==== Examples
-    #
-    #
-    #---
-    # @public
+    # @api public
     def self.add_format(format)
       formats.merge!(format)
       formats[format]
@@ -119,7 +113,6 @@ class Numeric
     
     # Formats a +number+ with grouped thousands using +delimiter+ (e.g., 12,324). You can
     # pass another format to format the number differently.
-    #
     #
     # ==== Parameters
     # format_name<Symbol>:: name of the format to use
@@ -138,8 +131,7 @@ class Numeric
     # with_delimiter(12345678, :FR) # => 12.345.678
     # with_delimiter(12345678, :US) # => 12,345,678
     #
-    #---
-    # @private
+    # @api private
     def self.with_delimiter(number, format_name = nil, options = {})
       
       format = (formats[format_name] || default_format)[:number].merge(options)
@@ -155,7 +147,6 @@ class Numeric
     
     # Formats a +number+ with a level of <tt>:precision</tt> (e.g., 112.32 has a precision of 2).
     # You can pass another format to use and even overwrite the format's options.
-    #
     #
     # ==== Parameters
     # format_name<Symbol>:: name of the format to use
@@ -174,8 +165,7 @@ class Numeric
     # with_precision(111.2345, :UK, :precision => 1) # => "111.2"
     # with_precision(1234.567, :US, :precision => 1, :separator => ',', :delimiter => '-') # => "1-234,6"
     #
-    #---
-    # @private
+    # @api private
     def self.with_precision(number, format_name = nil, options={})
 
       format = (formats[format_name] || default_format)[:number].merge(options)
@@ -215,8 +205,7 @@ class Numeric
     # to_currency(1234567890.506, :US, :precision => 3, :unit => "€") # => "€1,234,567,890.506"
     # to_currency(1234567890.506, :AU, :unit => "$AUD", :format => '%n %u') # => "1,234,567,890.51 $AUD"
     #
-    #---
-    # @private
+    # @api private
     def self.to_currency(number, format_name = nil, options = {})
       
       format = (formats[format_name] || default_format)[:currency].merge(options)
@@ -241,8 +230,7 @@ class Numeric
     # ==== Examples
     # two_digits(5-3) # => "02"
     #
-    #---
-    # @private
+    # @api private
     def self.two_digits(number)
       (0..9).include?(number) ? "0#{number}" : number.to_s
     end
@@ -258,8 +246,7 @@ class Numeric
     # ==== Examples
     # minutes_to_hours(315) => "05:15"
     #
-    #---
-    # @private
+    # @api private
     def self.minutes_to_hours(minutes)
       hours = (minutes/60).ceil
       minutes = (minutes - (hours * 60)).to_i
@@ -270,7 +257,6 @@ class Numeric
  
   # Formats with with grouped thousands using +delimiter+ (e.g., 12,324). You can
   # pass another format to format the number differently.
-  #
   #
   # ==== Parameters
   # format_name<Symbol>:: name of the format to use
@@ -289,15 +275,13 @@ class Numeric
   # 12345678.with_delimiter(:FR) # => 12.345.678
   # 12345678.with_delimiter(:US) # => 12,345,678
   #
-  #---
-  # @public
+  # @api public
   def with_delimiter(format_name = nil, options = {})
     Transformer.with_delimiter(self, format_name, options)
   end
   
   # Formats with a level of <tt>:precision</tt> (e.g., 112.32 has a precision of 2).
   # You can pass another format to use and even overwrite the format's options.
-  #
   #
   # ==== Parameters
   # format_name<Symbol>:: name of the format to use
@@ -316,8 +300,7 @@ class Numeric
   # 111.2345.with_precision(:UK, :precision => 1) # => "111.2"
   # 1234.567.with_precision(:US, :precision => 1, :separator => ',', :delimiter => '-') # => "1-234,6"
   #
-  #---
-  # @public
+  # @api public
   def with_precision(format_name = nil, options = {})
     Transformer.with_precision(self, format_name, options)
   end
@@ -347,8 +330,8 @@ class Numeric
   # 1234567890.516.to_currency(:US, :unit => "€")     # =>"€1,234,567,890.52"
   # 1234567890.506.to_currency(:US, :precision => 3, :unit => "€") # => "€1,234,567,890.506"
   # 1234567890.506.to_currency(:AU, :unit => "$AUD", :format => '%n %u') # => "1,234,567,890.51 $AUD"
-  #---
-  # @public
+  #
+  # @api public
   def to_currency(format_name = nil, options = {})
     Transformer.to_currency(self, format_name, options)
   end
@@ -361,8 +344,7 @@ class Numeric
   # ==== Examples
   # (5-3).two_digits # => "02"
   #
-  #---
-  # @public
+  # @api public
   def two_digits
     Transformer.two_digits(self)
   end
@@ -378,8 +360,7 @@ class Numeric
   # ==== Examples
   # 315.minutes_to_hours => "05:15"
   #
-  #---
-  # @public
+  # @api public
   def minutes_to_hours
     Transformer.minutes_to_hours(self)
   end

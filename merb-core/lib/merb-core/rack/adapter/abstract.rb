@@ -41,7 +41,7 @@ module Merb
         raise NotImplemented
       end
 
-      # Spawn a new worker process at a port.
+      # Spawns a new worker process at a port.
       #
       # ==== Parameters
       # port<Integer>:: The port to start the worker process on. 
@@ -141,7 +141,7 @@ module Merb
 
       end
 
-      # Fork a server on the specified port and start the app.
+      # Forks a server on the specified port and start the app.
       #
       # ==== Parameters
       # port<Integer>:: The port to start the server on
@@ -240,7 +240,7 @@ module Merb
         exit(status)
       end
 
-      # Set the process title.
+      # Sets the process title.
       #
       # ==== Parameters
       # whoami<Symbol>:: Either :spawner for the master process or :worker for any of the worker

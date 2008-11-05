@@ -193,7 +193,7 @@ module Merb
     # want to have your libraries under lib use autoload, add
     # the following to Merb init file:
     #
-    # Merb.push_path(:lib, Merb.root / "lib", "**/*.rb") # glob set explicity.
+    # Merb.push_path(:lib, Merb.root / "lib", "**/*.rb") # glob set explicitly.
     #
     # Then lib/magicwand/lib/magicwand.rb with MagicWand module will
     # be autoloaded when you first access that constant.
@@ -258,7 +258,7 @@ module Merb
     # ==== Parameters
     # type<Symbol>:: The type of path to retrieve glob for, e.g. :view.
     #
-    # ===== Returns
+    # ==== Returns
     # String:: The pattern with which to match files within the type directory.
     #
     # @api public
@@ -295,7 +295,7 @@ module Merb
     #   Merb.path("images") # => "/home/merb/app/images"
     #   Merb.path("views", "admin") # => "/home/merb/app/views/admin"
     #
-    # @public
+    # @api public
     def root_path(*path)
       File.join(root, *path)
     end
@@ -587,6 +587,7 @@ module Merb
     end
 
     # Ask the question about which environment you're in.
+    #
     # ==== Parameters
     # env<Symbol, String>:: Name of the environment to query
     #
@@ -676,10 +677,10 @@ module Merb
       @rakefiles ||= []
     end
     
-    # === Returns
+    # ==== Returns
     # Array(String):: Paths generators are loaded from
     #
-    # === Notes
+    # ==== Notes
     # Recommended way to find out what paths generators are loaded from.
     #
     # @api public
@@ -713,6 +714,7 @@ module Merb
 
     # Install a signal handler for a given signal unless signals have
     # been disabled with Merb.disable(:signals)
+    #
     # ==== Parameters
     # signal:: The name of the signal to install a handler for.
     # &block:: The block to be run when the given signal is received.

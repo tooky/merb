@@ -8,7 +8,7 @@ module Merb
       # ==== Parameters
       # name<String, Symbol>:: The name of the resources
       # options<Hash>::
-      #   Ovverides and parameters to be associated with the route
+      #   Overrides and parameters to be associated with the route
       #
       # ==== Options (options)
       # :namespace<~to_s>: The namespace for this route.
@@ -177,7 +177,7 @@ module Merb
       # ==== Parameters
       # name<String, Symbol>:: The name of the resource.
       # options<Hash>::
-      #   Overides and parameters to be associated with the route.
+      #   Overrides and parameters to be associated with the route.
       #
       # ==== Options (options)
       # :namespace<~to_s>: The namespace for this route.
@@ -271,7 +271,7 @@ module Merb
       
     protected
     
-      #api private
+      # @api private
       def register_resource(*key)
         options     = extract_options_from_args!(key) || {}
         key         = [ @options[:resource_prefix], key ].flatten.compact
@@ -281,7 +281,7 @@ module Merb
         self
       end
 
-      #api private
+      # @api private
       def resource_block(builders, &block)
         behavior = ResourceBehavior.new(builders, @proxy, @conditions, @params, @defaults, @identifiers, @options, @blocks)
         with_behavior_context(behavior, &block)
@@ -301,14 +301,14 @@ module Merb
     # Adding the collection and member methods to behavior
     class ResourceBehavior < Behavior #:nodoc:
       
-      #api private
+      # @api private
       def initialize(builders, *args)
         super(*args)
         @collection = builders[:collection]
         @member     = builders[:member]
       end
       
-      #api private
+      # @api private
       def collection(action, options = {})
         action = action.to_s
         method = options[:method]

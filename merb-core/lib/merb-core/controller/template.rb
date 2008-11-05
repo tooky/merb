@@ -9,7 +9,7 @@ module Merb::Template
   MTIMES                = {} unless defined?(MTIMES)
   
   class << self
-    # Get the template's method name from a full path. This replaces
+    # Gets the template's method name from a full path. This replaces
     # non-alphanumeric characters with __ and "." with "_"
     #
     # Collisions are potentially possible with something like:
@@ -21,7 +21,6 @@ module Merb::Template
     # ==== Returns
     # String:: The template name.
     #
-    #
     # We might want to replace this with something that varies the
     # character replaced based on the non-alphanumeric character
     # to avoid edge-case collisions.
@@ -32,7 +31,7 @@ module Merb::Template
       path.gsub(/[^\.a-zA-Z0-9]/, "__").gsub(/\./, "_")
     end
 
-    # For a given path, get an IO object that responds to #path.
+    # For a given path, gets an IO object that responds to #path.
     #
     # This is so that plugins can override this if they provide
     # mechanisms for specifying templates that are not just simple
@@ -54,7 +53,7 @@ module Merb::Template
       File.open(path, "r")
     end
 
-    # Get the name of the template method for a particular path.
+    # Gets the name of the template method for a particular path.
     #
     # ==== Parameters
     # path<String>:: A full path to find a template method for.
@@ -76,7 +75,7 @@ module Merb::Template
       METHOD_LIST[path]
     end
     
-    # Decide if a template needs to be re/compiled.
+    # Decides if a template needs to be re/compiled.
     #
     # ==== Parameters
     # path<String>:: The full path of the template to check support for.
@@ -94,7 +93,7 @@ module Merb::Template
         !(locals - current_locals).empty?
     end
     
-    # Get all known template extensions
+    # Gets all known template extensions
     #
     # ==== Returns
     #   Array:: Extension strings.
@@ -220,7 +219,7 @@ module Merb::Template
       #     <p>Some Foo content!</p> 
       #   <% end %>
       #
-      # @private
+      # @api private
       def capture_erb(*args, &block)
         _old_buf, @_erb_buf = @_erb_buf, ""
         block.call(*args)
@@ -229,7 +228,7 @@ module Merb::Template
         ret
       end
 
-      # @private
+      # @api private
       def concat_erb(string, binding)
         @_erb_buf << string
       end

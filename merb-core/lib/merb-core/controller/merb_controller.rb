@@ -26,7 +26,7 @@ class Merb::Controller < Merb::AbstractController
     klass._template_root = Merb.dir_for(:view) unless self._template_root
   end
 
-  # Hide each of the given methods from being callable as actions.
+  # Hides each of the given methods from being callable as actions.
   #
   # ==== Parameters
   # *names<~to-s>:: Actions that should be added to the list.
@@ -152,7 +152,7 @@ class Merb::Controller < Merb::AbstractController
     _conditionally_append_extension(template, type)
   end
 
-  # Build a new controller.
+  # Builds a new controller.
   #
   # Sets the variables that came in through the dispatch as available to
   # the controller.
@@ -205,7 +205,7 @@ class Merb::Controller < Merb::AbstractController
     @_status
   end
 
-  # Set the response status code.
+  # Sets the response status code.
   #
   # ==== Parameters
   # s<Fixnum, Symbol>:: A status-code or named http-status
@@ -227,11 +227,11 @@ class Merb::Controller < Merb::AbstractController
   # @api public
   def params()  request.params  end
     
-  # There are three possible ways to use this method.  First, if you have a named route, 
-  # you can specify the route as the first parameter as a symbol and any paramters in a 
-  # hash.  Second, you can generate the default route by just passing the params hash, 
-  # just passing the params hash.  Finally, you can use the anonymous parameters.  This 
-  # allows you to specify the parameters to a named route in the order they appear in the 
+  # There are three possible ways to use this method.  First, if you have a named route,
+  # you can specify the route as the first parameter as a symbol and any parameters in a
+  # hash.  Second, you can generate the default route by just passing the params hash,
+  # just passing the params hash.  Finally, you can use the anonymous parameters.  This
+  # allows you to specify the parameters to a named route in the order they appear in the
   # router.  
   #
   # ==== Parameters(Named Route)
@@ -272,7 +272,7 @@ class Merb::Controller < Merb::AbstractController
   #
   # url(:controller => "articles", :action => "new")
   #
-  # Anonymous Paramters
+  # Anonymous Parameters
   #
   # Merb::Router.prepare do
   #   match("/articles/:year/:month/:title").to(:controller => :articles, :action => :show).name("articles")
@@ -360,7 +360,7 @@ class Merb::Controller < Merb::AbstractController
   
   # Asks a controller if it is abstract
   #
-  # === Returns
+  # ==== Returns
   # Boolean
   #  true if the controller has been set as abstract
   #
@@ -374,7 +374,7 @@ class Merb::Controller < Merb::AbstractController
 
   private
 
-  # If not already added, add the proper mime extension to the template path.
+  # If not already added, adds the proper mime extension to the template path.
   #
   # ==== Parameters
   #

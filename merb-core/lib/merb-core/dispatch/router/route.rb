@@ -84,7 +84,7 @@ module Merb
       
       # Generates the URL for the route given the passed arguments. The
       # method will first match the anonymous parameters to route params
-      # and will convert all the parameters according to the specifed
+      # and will convert all the parameters according to the specified
       # object identifiers.
       #
       # Then the named parameters are passed to a compiled generation proc.

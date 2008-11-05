@@ -29,7 +29,7 @@ module Merb
   
   module MemcacheStore
     
-    # Make the Memcached gem conform to the SessionStoreContainer interface
+    # Makes the Memcached gem conform to the SessionStoreContainer interface
     
     # ==== Parameters
     # session_id<String>:: ID of the session to retrieve.

@@ -89,7 +89,7 @@ module Merb
         (@configuration ||= setup)[key] = val
       end
 
-      # Remove the value of a config entry.
+      # Removes the value of a config entry.
       #
       # ==== Parameters
       # key<Object>:: The key of the parameter to delete.
@@ -102,7 +102,7 @@ module Merb
         @configuration.delete(key)
       end
 
-      # Retrieve the value of a config entry, returning the provided default if the key is not present
+      # Retrieves the value of a config entry, returning the provided default if the key is not present
       #
       # ==== Parameters
       # key<Object>:: The key to retrieve the parameter for.

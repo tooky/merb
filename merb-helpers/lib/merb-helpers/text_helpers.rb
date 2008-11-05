@@ -13,7 +13,7 @@ module Merb::Helpers::Text
   # * Default name is :default
   #
   # ==== Example
-  # <%= 5.times { cycle("odd! ","even! "} %>
+  # <%= 5.times { cycle("odd! ","even! ") } %>
   #
   # Generates:
   #

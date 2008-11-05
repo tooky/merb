@@ -53,7 +53,7 @@ module Merb
       set_cookie(name, "", options.merge("expires" => Time.at(0)))
     end
     
-    # Generate any necessary headers.
+    # Generates any necessary headers.
     #
     # ==== Returns
     # Hash:: The headers to set, or an empty array if no cookies are set.
@@ -69,7 +69,7 @@ module Merb
         end
         secure  = options.delete("secure")
         kookie  = "#{name}=#{Merb::Parse.escape(value)}; "
-        # WebKit in particular doens't like empty cookie options - skip them.
+        # WebKit in particular doesn't like empty cookie options - skip them.
         options.each { |k, v| kookie << "#{k}=#{v}; " unless v.blank? }
         kookie  << 'secure' if secure
         cookies << kookie.rstrip

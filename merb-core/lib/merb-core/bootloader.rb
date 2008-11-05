@@ -330,7 +330,7 @@ class Merb::BootLoader::BuildFramework < Merb::BootLoader
     # Sets up merb paths to support the app's file layout. First, config/framework.rb is checked,
     # next we look for Merb.root/framework.rb, finally we use the default merb layout (Merb::BootLoader.default_framework)
     #
-    # This method can be overriden to support other application layouts.
+    # This method can be overridden to support other application layouts.
     #
     # ==== Returns
     # nil
@@ -357,7 +357,7 @@ end
 class Merb::BootLoader::Dependencies < Merb::BootLoader
 
   # ==== Returns
-  # Array[Gem::Dependency]:: The dependencies regiestered in init.rb.
+  # Array[Gem::Dependency]:: The dependencies registered in init.rb.
   #
   # @api plugin
   cattr_accessor :dependencies
@@ -676,7 +676,6 @@ class Merb::BootLoader::LoadClasses < Merb::BootLoader
     #   nil
     #
     # @api private
-
     def start_transaction
       Merb.logger.warn! "Parent pid: #{Process.pid}"
       reader, writer = nil, nil
@@ -773,13 +772,12 @@ class Merb::BootLoader::LoadClasses < Merb::BootLoader
     #
     # ==== Parameters
     # status<Integer>:: The status code to exit with. Defaults to 0.
+    # sig<String>:: The signal to send to workers
     #
     # ==== Returns
     # (Does not return.)
     #
     # @api private
-    # @param status<Integer> The status code to exit with
-    # @param sig<String>     The signal to send to workers
     def reap_workers(status = 0, sig = "ABRT")
       Merb.logger.info "Executed all before worker shutdown callbacks..."
       Merb::BootLoader.before_worker_shutdown_callbacks.each do |cb|
@@ -848,7 +846,7 @@ class Merb::BootLoader::LoadClasses < Merb::BootLoader
       nil
     end
 
-    # Load classes from given paths - using path/glob pattern.
+    # Loads classes from given paths - using path/glob pattern.
     #
     # ==== Parameters
     # *paths<Array>::
@@ -873,8 +871,8 @@ class Merb::BootLoader::LoadClasses < Merb::BootLoader
     end
 
     # Reloads the classes in the specified file. If fork-based loading is used,
-    # this causes the current processes to be killed and and all classes to be
-    # reloaded. If class-based loading is not in use, the classes declared in that file
+    # this causes the current processes to be killed and all classes to be reloaded.
+    # If class-based loading is not in use, the classes declared in that file
     # are removed and the file is reloaded.
     #
     # ==== Parameters
@@ -1093,7 +1091,7 @@ class Merb::BootLoader::Templates < Merb::BootLoader
   end
 end
 
-# Register the default MIME types:
+# Registers the default MIME types:
 #
 # By default, the mime-types include:
 # :all:: no transform, */*
@@ -1186,7 +1184,7 @@ end
 
 # In case someone's running a sparse app, the default exceptions require the
 # Exceptions class.  This must run prior to the AfterAppLoads BootLoader
-# So that plugins may have ensured access in the after_app_loads block
+# so that plugins may have ensured access in the after_app_loads block
 class Merb::BootLoader::SetupStubClasses < Merb::BootLoader
   # Declares empty Application and Exception controllers.
   #

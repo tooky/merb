@@ -107,7 +107,7 @@ module Merb::Test::MultipartRequestHelper
   #   
   # Does not use routes.
   #---
-  # @public
+  # @api public
   def dispatch_multipart_to(controller_klass, action, params = {}, env = {}, &blk)
     request = multipart_fake_request(env, params)
     dispatch_request(request, controller_klass, action, &blk)

@@ -1,7 +1,7 @@
 module Merb
   
   class Router
-    # Cache procs for future reference in eval statement
+    # Caches procs for future reference in eval statement
     class CachedProc
       @@index = 0
       @@list = []

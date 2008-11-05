@@ -56,7 +56,7 @@ module Merb
     end
     
     # Helper for creating unique paths to a file name
-    # Can increase speend for browsers that are limited to a certain number of connections per host 
+    # Can increase speed for browsers that are limited to a certain number of connections per host
     # for downloading static files (css, js, images...)
     class UniqueAssetPath
       class << self
@@ -102,7 +102,7 @@ module Merb
       
       class << self
         
-        # Mark a bundle as cached.
+        # Marks a bundle as cached.
         #
         # ==== Parameters
         # name<~to_s>:: Name of the bundle
@@ -111,7 +111,7 @@ module Merb
           cached_bundles.push(name.to_s)
         end
         
-        # Purge a bundle from the cache.
+        # Purges a bundle from the cache.
         #
         # ==== Parameters
         # name<~to_s>:: Name of the bundle
@@ -120,7 +120,7 @@ module Merb
           cached_bundles.delete(name.to_s)
         end
         
-        # Test if a bundle has been cached.
+        # Tests if a bundle has been cached.
         #
         # ==== Parameters
         # name<~to_s>:: Name of the bundle
@@ -141,7 +141,7 @@ module Merb
         end
         alias_method :after_bundling, :add_callback
         
-        # Retrieve existing callbacks.
+        # Retrieves existing callbacks.
         #
         # ==== Returns
         # Array[Proc]:: An array of existing callbacks.
@@ -150,8 +150,8 @@ module Merb
           return @callbacks
         end
         
-        # The type of asset for which the bundler is responsible. Override
-        # this method in your bundler code.
+        # Returns the type of asset for which the bundler is responsible.
+        # Override this method in your bundler code.
         #
         # ==== Raises
         # NotImplementedError:: This method is implemented by the bundler.
@@ -199,7 +199,7 @@ module Merb
       
       include Merb::Assets::AssetHelpers # for asset_path
       
-      # Bundle all the files into one.
+      # Bundles all the files into one.
       #
       # ==== Parameters
       # filename<String>:: Name of the bundle file.
