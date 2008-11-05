@@ -83,12 +83,12 @@ module Kernel
     dep = name.is_a?(Gem::Dependency) ? name : track_dependency(name, *ver, &blk)
     gem(dep)
   rescue Gem::LoadError => e
-    Merb.fatal! "The gem #{name}, #{ver.inspect} was not found", e
+    Merb.fatal! "Could not activate gem #{name}: #{e.message}.\nIt may happen because gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."
   ensure
     begin
       require dep.require_as
     rescue LoadError => e
-      Merb.fatal! "The file #{dep.require_as} was not found", e
+      Merb.fatal! "Could not load gem #{name}: #{e.message}.\nIt may happen because you mispelled file to require or gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."
     end
 
     if block = dep.require_block
