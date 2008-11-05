@@ -32,6 +32,7 @@ module Merb::AuthenticatedHelper
       redirect default_url, opts
     end
     "Redirecting to <a href='#{default_url}'>#{default_url}</a>"
+    "Redirecting to <a href='#{default_url}'>#{default_url}</a>"
   end
   
 end
