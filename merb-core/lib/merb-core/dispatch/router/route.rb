@@ -167,7 +167,7 @@ module Merb
                   obj.instance_of?(Fixnum)     || obj.instance_of?(Float)      ||
                   obj.instance_of?(Bignum)     || obj.instance_of?(TrueClass)  ||
                   obj.instance_of?(FalseClass) || obj.instance_of?(NilClass)   ||
-                  obj.instance_of?(Array)      || obj.instance_of?(Hash)
+                  obj.instance_of?(Array)      || obj.instance_of?(Hash)       || obj.instance_of?(Mash)
         
         @identifiers.each do |klass, identifier|
           return identifier if obj.is_a?(klass)
