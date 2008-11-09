@@ -23,7 +23,7 @@ if defined?(Merb::Plugins)
     # Slice metadata
     self.description = "<%= module_name %> is a chunky Merb slice!"
     self.version = "0.0.1"
-    self.author = "Engine Yard"
+    self.author = "Your Name"
     
     # Stub classes loaded hook - runs before LoadClasses BootLoader
     # right after a slice's classes have been loaded internally.
@@ -54,7 +54,6 @@ if defined?(Merb::Plugins)
     def self.setup_router(scope)
       # example of a named route
       scope.match('/index(.:format)').to(:controller => 'main', :action => 'index').name(:index)
-      # the slice is mounted at /<%= base_name %> - note that it comes before default_routes
       scope.match('/').to(:controller => 'main', :action => 'index').name(:home)
       # enable slice-level default routes by default
       scope.default_routes
