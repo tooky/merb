@@ -10,6 +10,7 @@ include FileUtils
 merb_more_gem_paths = %w[
   merb-action-args 
   merb-assets 
+  merb-slices
   merb-auth
   merb-cache 
   merb-exceptions
@@ -18,7 +19,6 @@ merb_more_gem_paths = %w[
   merb-helpers 
   merb-mailer 
   merb-param-protection
-  merb-slices
   merb_datamapper
 ]
 
@@ -38,9 +38,10 @@ merb_more_spec = Gem::Specification.new do |s|
   s.summary      = "(merb - merb-core) == merb-more.  The Full Stack. Take what you need; leave what you don't."
   s.description  = s.summary
   s.files        = %w( LICENSE README Rakefile TODO lib/merb-more.rb )
+  s.required_rubygems_version = ">= 1.3.0"
   s.add_dependency "merb-core", ">= #{Merb::VERSION}"
   merb_more_gems.each do |gem|
-    s.add_dependency gem, [">= #{Merb::VERSION}", "<= 1.0"]
+    s.add_dependency gem, ">= #{Merb::VERSION}"
   end
 end
 
@@ -62,6 +63,7 @@ namespace :install do
     merb_more_gems.each do |gem|
       Merb::RakeHelper.install(gem, :version => Merb::VERSION)
     end
+    Merb::RakeHelper.install("merb", :version => Merb::VERSION)
   end
   
 end
@@ -83,7 +85,13 @@ namespace :uninstall do
 end
 
 desc "Install all gems"
-task :install => ['install:core', 'install:more']
+task :install do
+  merb_more_gems.each do |gem|
+    Merb::RakeHelper.install(gem, :version => Merb::VERSION)
+  end
+  %x{sudo gem install gems/merb-more-#{Merb::VERSION}.gem}
+  %x{sudo gem install gems/merb-#{Merb::VERSION}.gem}
+end
 
 desc "Uninstall all gems"
 task :uninstall => ['uninstall:core', 'uninstall:more']
@@ -175,7 +183,7 @@ namespace :release do
     require 'rubyforge'
     require 'rake/contrib/rubyforgepublisher'
 
-    packages = %w( gem tgz zip ).collect{ |ext| "pkg/merb-#{PKG_VERSION}.#{ext}" }
+    packages = %w( gem tgz zip ).collect{ |ext| "gems/merb-#{PKG_VERSION}.#{ext}" }
 
     begin
       sh %{rubyforge login}

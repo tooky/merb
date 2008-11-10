@@ -2,6 +2,7 @@ require 'rubygems/dependency'
 
 module Gem
   class Dependency
+    # :api: private
     attr_accessor :require_block, :require_as
   end
 end
@@ -18,7 +19,7 @@ module Kernel
   # ==== Returns
   # Gem::Dependency:: The dependency information.
   #
-  # @api private
+  # :api: private
   def track_dependency(name, *ver, &blk)
     options = ver.pop if ver.last.is_a?(Hash)
     new_dep = Gem::Dependency.new(name, ver.empty? ? nil : ver)
@@ -53,7 +54,7 @@ module Kernel
   # ==== Returns
   # Gem::Dependency:: The dependency information.
   #
-  # @api public
+  # :api: public
   def dependency(name, *ver, &blk)
     immediate = ver.last.delete(:immediate) if ver.last.is_a?(Hash)
     if immediate || Merb::BootLoader.finished?(Merb::BootLoader::Dependencies)
@@ -81,7 +82,7 @@ module Kernel
   # ==== Returns
   # Gem::Dependency:: The dependency information.
   #
-  # @api private
+  # :api: private
   def load_dependency(name, *ver, &blk)
     dep = name.is_a?(Gem::Dependency) ? name : track_dependency(name, *ver, &blk)
     Merb.logger.verbose!("activating gem '#{dep.name}' ...")
@@ -114,7 +115,7 @@ module Kernel
   # Array[(Gem::Dependency, Array[Gem::Dependency])]:: Gem::Dependencies for the
   #   dependencies specified in args.
   #
-  # @api public
+  # :api: public
   def dependencies(*args)
     args.map do |arg|
       case arg
@@ -142,7 +143,7 @@ module Kernel
   # dependencies "RedCloth", "merb_helpers" # Loads RedCloth and merb_helpers
   # dependencies "RedCloth" => "3.0"        # Loads RedCloth 3.0
   #
-  # @api private
+  # :api: private
   def load_dependencies(*args)
     args.map do |arg|
       case arg
@@ -159,7 +160,7 @@ module Kernel
   # library<to_s>:: The library to attempt to include.
   # message<String>:: The error to add to the log upon failure. Defaults to nil.
   #
-  # @api private
+  # :api: private
   # @deprecated
   def rescue_require(library, message = nil)
     Merb.logger.warn("Deprecation warning: rescue_require is deprecated")
@@ -189,12 +190,12 @@ module Kernel
   #   If for some reason this is called more than once, latter
   #   call takes over other.
   #
-  # @api public
-  def use_orm(orm)
+  # :api: public
+  def use_orm(orm, &blk)
     begin
       Merb.orm = orm
       orm_plugin = "merb_#{orm}"
-      Kernel.dependency(orm_plugin)
+      Kernel.dependency(orm_plugin, &blk)
     rescue LoadError => e
       Merb.logger.warn!("The #{orm_plugin} gem was not found.  You may need to install it.")
       raise e
@@ -218,7 +219,7 @@ module Kernel
   #   # This will now use the RSpec generator for tests
   #   $ merb-gen model ActivityEvent
   #
-  # @api public
+  # :api: public
   def use_testing_framework(test_framework, *test_dependencies)
     Merb.test_framework = test_framework
     
@@ -246,8 +247,8 @@ module Kernel
   #   # This will now use haml templates in generators where available.
   #   $ merb-gen resource_controller Project 
   #
-  # @api public
-  def use_template_engine(template_engine)
+  # :api: public
+  def use_template_engine(template_engine, &blk)
     Merb.template_engine = template_engine
 
     if template_engine != :erb
@@ -256,7 +257,7 @@ module Kernel
       else
         template_engine_plugin = "merb_#{template_engine}"
       end
-      Kernel.dependency(template_engine_plugin)
+      Kernel.dependency(template_engine_plugin, &blk)
     end
     
     nil
@@ -276,7 +277,7 @@ module Kernel
   # __caller_info__(1)
   #   # => ['/usr/lib/ruby/1.8/irb/workspace.rb', '52', 'irb_binding']
   #
-  # @api private
+  # :api: private
   def __caller_info__(i = 1)
     file, line, meth = caller[i].scan(/(.*?):(\d+):in `(.*?)'/).first
   end
@@ -303,7 +304,7 @@ module Kernel
   #     [ 124, "      @suspend_next = false",                       false ]
   #   ]
   #
-  # @api private
+  # :api: private
   def __caller_lines__(file, line, size = 4)
     line = line.to_i
     if file =~ /\(erubis\)/
@@ -357,7 +358,7 @@ module Kernel
   # total time to run, #puts won't appear in the profile report.
   # The code block will be run 30 times in the example above.
   #
-  # @api private
+  # :api: private
   def __profile__(name, min=1, iter=100)
     require 'ruby-prof' unless defined?(RubyProf)
     return_result = ''
@@ -385,7 +386,7 @@ module Kernel
   #   # [...]
   # end
   #
-  # @api public
+  # :api: public
   def extract_options_from_args!(args)
     last_arg = args.last
     if last_arg.instance_of?(Hash) || last_arg.instance_of?(Mash)
@@ -405,7 +406,7 @@ module Kernel
   # ==== Raises
   # <ArgumentError>:: An object failed to quack like a condition.
   #
-  # @api public
+  # :api: public
   def enforce!(opts = {})
     opts.each do |k,v|
       raise ArgumentError, "#{k.inspect} doesn't quack like #{v.inspect}" unless k.quacks_like?(v)
