@@ -104,3 +104,16 @@ describe "Kernel#load_dependencies" do
     end
   end
 end
+
+describe "Kernel#load_dependency" do
+  
+  it "ignores dep.require_as if dep.require_block is present" do
+    dep = track_dependency('hpricot') { } #a require_block is now present
+    dep.should_not_receive(:require_as)
+    begin
+      load_dependency(dep)
+    rescue LoadError => e
+      # sanity check, should never happen
+    end
+  end
+end

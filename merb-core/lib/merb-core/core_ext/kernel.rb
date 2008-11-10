@@ -87,7 +87,7 @@ module Kernel
     Merb.fatal! "The gem #{name}, #{ver.inspect} was not found", e
   ensure
     begin
-      require dep.require_as
+      require dep.require_as unless dep.require_block
     rescue LoadError => e
       Merb.fatal! "The file #{dep.require_as} was not found", e
     end
