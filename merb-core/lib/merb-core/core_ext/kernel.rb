@@ -88,14 +88,14 @@ module Kernel
     Merb.logger.verbose!("activating gem '#{dep.name}' ...")
     gem(dep)
   rescue Gem::LoadError => e
-    Merb.fatal! "Could not activate gem #{name}: #{e.message}.\nIt may happen because gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."
+    Merb.fatal! "Could not activate gem #{name}: #{e.message}.\nIt may happen because gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is.", e
   ensure
     begin
       Merb.logger.verbose!("loading gem '#{dep.name}' ...")
       require dep.require_as
     Merb.logger.verbose!("loaded gem '#{dep.name}' ...")
     rescue LoadError => e
-      Merb.fatal! "Could not load gem #{name}: #{e.message}.\nIt may happen because you mispelled file to require or gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."
+      Merb.fatal! "Could not load gem #{name}: #{e.message}.\nIt may happen because you mispelled file to require or gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is.", e
     end
 
     if block = dep.require_block

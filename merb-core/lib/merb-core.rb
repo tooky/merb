@@ -443,7 +443,7 @@ module Merb
 
       print_colorized_backtrace(e) if e && Merb::Config[:verbose]
       
-      if Merb::Config[:show_ugly_backtraces]
+      if Merb::Config[:show_ugly_backtraces] && e
         raise e
       else
         exit(1)
