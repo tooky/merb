@@ -80,6 +80,16 @@ module Kernel
   # as a library. If block given, it is called instead of doing a require,
   # so that you can pass some arbitraty code do load the gem.
   #
+  # Usage scenarios:
+  #
+  # 1. Gem name and loaded file names are the same (ex.: dm-core uses dm-core.rb).
+  #    In this case no extra options needed.
+  # 2. Gem name is different from the file needs to be required
+  #    (ex.: ParseTree gem uses parse_tree.rb as main file).
+  # 3. You need to require a number of files from the library explicitly
+  #    (ex.: cherry pick features from xmpp4r). Pass a block to this method
+  #    and do the requires you need explicitly.
+  #
   # ==== Returns
   # Gem::Dependency:: The dependency information.
   #
