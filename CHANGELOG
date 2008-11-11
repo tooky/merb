@@ -1,5 +1,6 @@
 == 1.1 (not yet released)
 
+* Improve Kernel#dependency documentation: add examples and more usage scenarios. [Michael Klishin]
 * Block given to Kernel#dependency should take precedence over:require_as option. [Jacob Dunphy, Michael Klishin]
 * Fixes a bug in the auth slice where it's looking at the wrong configuration option. [Daniel Neighman]
 * More clear error message when gem fails to load. [Michael Klishin]
