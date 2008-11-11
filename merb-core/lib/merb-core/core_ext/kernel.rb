@@ -294,15 +294,15 @@ module Kernel
   #   Triplets containing the line number, the line and whether this was the
   #   searched line.
   #
-  # ==== Example
-  # __caller_lines__('/usr/lib/ruby/1.8/debug.rb', 122, 2) # =>
-  #   [
-  #     [ 120, "  def check_suspend",                               false ],
-  #     [ 121, "    return if Thread.critical",                     false ],
-  #     [ 122, "    while (Thread.critical = true; @suspend_next)", true  ],
-  #     [ 123, "      DEBUGGER__.waiting.push Thread.current",      false ],
-  #     [ 124, "      @suspend_next = false",                       false ]
-  #   ]
+  # @example
+  #   __caller_lines__('/usr/lib/ruby/1.8/debug.rb', 122, 2) # =>
+  #     [
+  #       [ 120, "  def check_suspend",                               false ],
+  #       [ 121, "    return if Thread.critical",                     false ],
+  #       [ 122, "    while (Thread.critical = true; @suspend_next)", true  ],
+  #       [ 123, "      DEBUGGER__.waiting.push Thread.current",      false ],
+  #       [ 124, "      @suspend_next = false",                       false ]
+  #     ]
   #
   # :api: private
   def __caller_lines__(file, line, size = 4)

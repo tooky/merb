@@ -18,7 +18,7 @@ if defined?(Merb::Plugins)
   # Configuration options:
   # :layout - the layout to use; defaults to :mauth_password_slice
   # :mirror - which path component types to use on copy operations; defaults to all
-  Merb::Slices::config[:"merb-auth-slice-password"][:layout] ||= :application
+  Merb::Slices::config[:merb_auth_slice_password][:layout] ||= :application
   
   # All Slice code is expected to be namespaced inside a module
   module MerbAuthSlicePassword

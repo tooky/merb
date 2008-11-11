@@ -115,7 +115,7 @@ module Merb
         puts "Modifications have been rolled back"
       end
 
-      # Explicitly show logger output during IRB session
+      # Explictly show logger output during IRB session
       # :api: public
       def trace_log!
         Merb.logger.auto_flush = true
