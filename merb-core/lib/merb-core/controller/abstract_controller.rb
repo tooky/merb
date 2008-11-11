@@ -643,6 +643,7 @@ class Merb::AbstractController
   #
   # :api: private
   def self.add_filter(filters, filter, opts={})
+    opts = Mash.new(opts)
     raise(ArgumentError,
       "You can specify either :only or :exclude but 
        not both at the same time for the same filter.") if opts.key?(:only) && opts.key?(:exclude)
@@ -652,7 +653,7 @@ class Merb::AbstractController
         not both at the same time for the same filter.") if opts.key?(:if) && opts.key?(:unless)
         
     opts.each_key do |key| raise(ArgumentError,
-      "You can only specify known filter options, #{key} is invalid.") unless FILTER_OPTIONS.include?(key)
+      "You can only specify known filter options, #{key} is invalid.") unless FILTER_OPTIONS.include?(key.to_sym)
     end
 
     opts = normalize_filters!(opts)

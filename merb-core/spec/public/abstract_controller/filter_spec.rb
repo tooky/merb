@@ -140,4 +140,9 @@ describe Merb::AbstractController, " should support before and after filters" do
   it "doesn't override existing filters by filters with similar names" do
     dispatch_should_make_body("HasFiltersWithSimilarNames", "Befilter Bef Index")
   end
+
+  # #979
+  it "uses Mash for filter options" do
+    dispatch_should_make_body("UsesMixedOptionKeys", "symbolstring")
+  end
 end

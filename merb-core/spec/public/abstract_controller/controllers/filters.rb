@@ -256,5 +256,26 @@ module Merb::Test::Fixtures
         "Awesome"
       end
     end
+
+    class UsesMixedOptionKeys < Testing
+      before :appends_symbol, :only => :index
+      before :appends_string, "only" => "index"
+
+      def index
+        @content
+      end
+
+      protected
+
+      def appends_symbol
+        @content ||= ""
+        @content << "symbol"
+      end
+
+      def appends_string
+        @content ||= ""
+        @content << "string"
+      end
+    end
   end
 end
