@@ -51,21 +51,49 @@ module Kernel
   #   If the last argument is a Hash, extract the :immediate option,
   #   forcing a dependency to load immediately.
   #
+  # ==== Options
+  #
+  # :immediate   when true, gem is loaded immediately even if framework is not yet ready.
+  # :require_as  file name to require for this gem.
+  #
+  # See examples below.
+  #
   # ==== Notes
   #
   # If block is given, it takes precedence and you need to do
   # requires explicitly in that block.
   #
+  # ==== Examples
+  #
   # Usage scenario is typically one of the following:
   #
-  # 1. Gem name and loaded file names are the same (ex.: dm-core uses dm-core.rb).
+  # 1. Gem name and loaded file names are the same (ex.: amqp gem uses amqp.rb).
   #    In this case no extra options needed.
+  #
+  # dependency "amqp"
+  #
   # 2. Gem name is different from the file needs to be required
   #    (ex.: ParseTree gem uses parse_tree.rb as main file).
+  #
+  # dependency "ParseTree", :require_as => "parse_tree"
+  #
   # 3. You need to require a number of files from the library explicitly
   #    (ex.: cherry pick features from xmpp4r). Pass a block to this method
   #    and do the requires you need explicitly.
   #
+  # dependency "xmpp4r" do
+  #   require 'xmpp4r/client.rb'
+  #   require 'xmpp4r/sasl.rb'
+  #   require 'xmpp4r/vcard.rb'
+  # end
+  #
+  # 4. You need to require a specific version of the gem.
+  #
+  # dependency "RedCloth", "3.0.4"
+  #
+  # 5. You want to load dependency as soon as the method is called.
+  #
+  # dependency "syslog", :immediate => true
   #
   # ==== Returns
   # Gem::Dependency:: The dependency information.
