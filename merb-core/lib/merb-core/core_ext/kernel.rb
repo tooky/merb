@@ -77,7 +77,8 @@ module Kernel
   #
   # ==== Notes
   # If the gem cannot be found, the method will attempt to require the string
-  # as a library.
+  # as a library. If block given, it is called instead of doing a require,
+  # so that you can pass some arbitraty code do load the gem.
   #
   # ==== Returns
   # Gem::Dependency:: The dependency information.
@@ -92,14 +93,15 @@ module Kernel
   ensure
     begin
       Merb.logger.verbose!("loading gem '#{dep.name}' ...")
-      require dep.require_as
-    Merb.logger.verbose!("loaded gem '#{dep.name}' ...")
+      if block = dep.require_block
+        Merb.logger.verbose!("using a block to load '#{dep.name}' ...")
+        block.call
+      else
+        Merb.logger.verbose!("using require '#{dep.require_as}' to load '#{dep.name}' ...")
+        require dep.require_as
+      end
     rescue LoadError => e
       Merb.fatal! "Could not load gem #{name}: #{e.message}.\nIt may happen because you mispelled file to require or gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is.", e
-    end
-
-    if block = dep.require_block
-      block.call
     end
 
     return dep # ensure needs explicit return
