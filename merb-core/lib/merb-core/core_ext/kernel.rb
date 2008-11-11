@@ -51,6 +51,22 @@ module Kernel
   #   If the last argument is a Hash, extract the :immediate option,
   #   forcing a dependency to load immediately.
   #
+  # ==== Notes
+  #
+  # If block is given, it takes precedence and you need to do
+  # requires explicitly in that block.
+  #
+  # Usage scenario is typically one of the following:
+  #
+  # 1. Gem name and loaded file names are the same (ex.: dm-core uses dm-core.rb).
+  #    In this case no extra options needed.
+  # 2. Gem name is different from the file needs to be required
+  #    (ex.: ParseTree gem uses parse_tree.rb as main file).
+  # 3. You need to require a number of files from the library explicitly
+  #    (ex.: cherry pick features from xmpp4r). Pass a block to this method
+  #    and do the requires you need explicitly.
+  #
+  #
   # ==== Returns
   # Gem::Dependency:: The dependency information.
   #
@@ -70,6 +86,7 @@ module Kernel
   # off to the system gems (so if you have a lower version of a gem in
   # ROOT/gems, it'll still get loaded).
   #
+  #
   # ==== Parameters
   # name<String> The name or dependency object of the gem to load.
   # *ver<Gem::Requirement, Gem::Version, Array, #to_str>
@@ -80,15 +97,6 @@ module Kernel
   # as a library. If block given, it is called instead of doing a require,
   # so that you can pass some arbitraty code do load the gem.
   #
-  # Usage scenarios:
-  #
-  # 1. Gem name and loaded file names are the same (ex.: dm-core uses dm-core.rb).
-  #    In this case no extra options needed.
-  # 2. Gem name is different from the file needs to be required
-  #    (ex.: ParseTree gem uses parse_tree.rb as main file).
-  # 3. You need to require a number of files from the library explicitly
-  #    (ex.: cherry pick features from xmpp4r). Pass a block to this method
-  #    and do the requires you need explicitly.
   #
   # ==== Returns
   # Gem::Dependency:: The dependency information.
