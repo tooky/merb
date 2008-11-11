@@ -1,3 +1,9 @@
+== 1.1 (not yet released)
+
+* Block given to Kernel#dependency should take precedence over:require_as option. [Jacob Dunphy, Michael Klishin]
+* Fixes a bug in the auth slice where it's looking at the wrong configuration option. [Daniel Neighman]
+* More clear error message when gem fails to load. [Michael Klishin]
+
 == 0.9.3 "We Sold Our Soul for Rock 'n' Roll" 2008-05-03
 * Add mongrel as dependency of merb meta gem
 * make merb.fcgi executable
