@@ -133,6 +133,9 @@ module Merb
         Merb.push_path(:application,  Merb.root_path("app" / "controllers" / "application.rb"))
         Merb.push_path(:config,       Merb.root_path("config"), nil)
         Merb.push_path(:router,       Merb.dir_for(:config), (Merb::Config[:router_file] || "router.rb"))
+        # IMPORTANT! Enabling autoload here for lib breaks most of Rake tasks
+        # in Merb repository. If you want to enable autoload by default,
+        # do it in the generated init.rb file: Merb.push_path(Merb.root_path("lib"), "*/*.rb")
         Merb.push_path(:lib,          Merb.root_path("lib"), nil)
         Merb.push_path(:merb_session, Merb.root_path("merb" / "session"))
         Merb.push_path(:log,          Merb.log_path, nil)
