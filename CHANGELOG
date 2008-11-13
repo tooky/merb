@@ -1,7 +1,7 @@
 == 1.1 (not yet released)
 
 * :require_as option of Kernel#dependency now can handle array values [Michael Klishin]
-* Add dependency on rdoc >= 2.2.0.
+* Add dependency on rdoc >= 2.2.0. [Michael Klishin]
 * Filters should use Mash for options. [Michael Klishin]
 * Improve Kernel#dependency documentation: add examples and more usage scenarios. [Michael Klishin]
 * Fixes a bug in the auth slice where it's looking at the wrong configuration option. [Daniel Neighman]
