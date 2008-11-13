@@ -4,8 +4,13 @@
 * Add dependency on rdoc >= 2.2.0. [Michael Klishin]
 * Filters should use Mash for options. [Michael Klishin]
 * Improve Kernel#dependency documentation: add examples and more usage scenarios. [Michael Klishin]
-* Fixes a bug in the auth slice where it's looking at the wrong configuration option. [Daniel Neighman]
+* Fixes a bug in the auth slice where it's looking at the wrong configuration option.
 * More clear error message when gem fails to load. [Michael Klishin]
+
+== 1.0.1
+
+* generate unique session_id_key with new apps
+
 
 == 0.9.8 "Time Machine" 2008-06-10
 
