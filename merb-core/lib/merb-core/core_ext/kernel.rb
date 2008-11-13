@@ -60,8 +60,9 @@ module Kernel
   #
   # ==== Notes
   #
-  # If block is given, it takes precedence and you need to do
-  # requires explicitly in that block.
+  # If block is given, it is called after require is called. If you use a block to
+  # require multiple files, require first using :require_as option and the rest
+  # in the block.
   #
   # ==== Examples
   #
@@ -135,19 +136,21 @@ module Kernel
     Merb.logger.verbose!("activating gem '#{dep.name}' ...")
     gem(dep)
   rescue Gem::LoadError => e
-    Merb.fatal! "Could not activate gem #{name}: #{e.message}.\nIt usually means gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is.", e
+    msg = "Could not activate gem #{name} using gem '#{dep.name}': #{e.message}.\nIt usually means gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."
+    Merb.fatal! msg, e
   ensure
     begin
       Merb.logger.verbose!("loading gem '#{dep.name}' ...")
-      if block = dep.require_block
-        Merb.logger.verbose!("using a block to load '#{dep.name}' ...")
-        block.call
-      else
-        Merb.logger.verbose!("using require '#{dep.require_as}' to load '#{dep.name}' ...")
-        require dep.require_as
-      end
+      Merb.logger.verbose!("using require '#{dep.require_as}' to load '#{dep.name}' ...")
+      require dep.require_as
     rescue LoadError => e
-      Merb.fatal! "Could not load gem #{name}: #{e.message}.\nIt may happen because you mispelled file to require or gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is.", e
+      msg = "Could not load gem #{name} (tried to require #{dep.require_as.inspect}): #{e.message}.\nIt may happen because you mispelled file to require or gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."
+      Merb.fatal! msg, e
+    end
+
+    if block = dep.require_block
+      Merb.logger.verbose!("calling a block after loading of '#{dep.name}' ...")
+      block.call
     end
 
     return dep # ensure needs explicit return
