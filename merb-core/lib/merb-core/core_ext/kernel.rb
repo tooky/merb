@@ -79,14 +79,9 @@ module Kernel
   # dependency "ParseTree", :require_as => "parse_tree"
   #
   # 3. You need to require a number of files from the library explicitly
-  #    (ex.: cherry pick features from xmpp4r). Pass a block to this method
-  #    and do the requires you need explicitly.
+  #    (ex.: cherry pick features from xmpp4r). Pass a n array to :require_as.
   #
-  # dependency "xmpp4r" do
-  #   require 'xmpp4r/client.rb'
-  #   require 'xmpp4r/sasl.rb'
-  #   require 'xmpp4r/vcard.rb'
-  # end
+  # dependency "xmpp4r", :require_as => %w(xmpp4r/client xmpp4r/sasl xmpp4r/vcard)
   #
   # 4. You need to require a specific version of the gem.
   #
@@ -95,6 +90,15 @@ module Kernel
   # 5. You want to load dependency as soon as the method is called.
   #
   # dependency "syslog", :immediate => true
+  #
+  # 6. You need to execute some arbitraty code after dependency is loaded:
+  #
+  # dependency "ruby-growl" do
+  #   g = Growl.new "localhost", "ruby-growl",
+  #              ["ruby-growl Notification"]
+  #   g.notify "ruby-growl Notification", "Ruby-Growl is set up",
+  #         "Ruby-Growl is set up"
+  # end
   #
   # ==== Returns
   # Gem::Dependency:: The dependency information.
