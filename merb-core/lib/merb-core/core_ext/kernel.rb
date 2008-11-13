@@ -141,8 +141,10 @@ module Kernel
   ensure
     begin
       Merb.logger.verbose!("loading gem '#{dep.name}' ...")
-      Merb.logger.verbose!("using require '#{dep.require_as}' to load '#{dep.name}' ...")
-      require dep.require_as
+      [dep.require_as].flatten.each do |req|
+        Merb.logger.verbose!("running require '#{req}' ...")
+        require req
+      end
     rescue LoadError => e
       msg = "Could not load gem #{name} (tried to require #{dep.require_as.inspect}): #{e.message}.\nIt may happen because you mispelled file to require or gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."
       Merb.fatal! msg, e
