@@ -8,10 +8,13 @@ require 'merb-core/dispatch/session'
 require 'spec' # Satisfies Autotest and anyone else not using the Rake tasks
 require 'merb-auth-core'
 
-Merb.start  :environment    => "test", 
-            :adapter        => "runner", 
-            :session_store  => "cookie", 
-            :session_secret_key => "d3a6e6f99a25004da82b71af8b9ed0ab71d3ea21"
+# Merb.disable(:initfile)
+
+Merb.start  :environment        => "test", 
+            :adapter            => "runner", 
+            :session_store      => "cookie", 
+            :session_secret_key => "d3a6e6f99a25004da82b71af8b9ed0ab71d3ea21",
+            :merb_root          => File.expand_path(File.dirname(__FILE__) / 'fixture')
 
 module StrategyHelper
   def clear_strategies!
