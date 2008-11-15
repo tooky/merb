@@ -30,6 +30,7 @@ Merb::Router.prepare do
   # RESTful routes
   # resources :posts
   match("/basic_auth").to(:controller => "basic_auth")
+  match("/openid_auth").to(:controller => "openid_auth").name(:openid)
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
