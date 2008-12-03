@@ -1,9 +1,11 @@
 require 'rubygems/dependency'
+gem "ruby-debug"
+require "ruby-debug"
 
 module Gem
   class Dependency
     # :api: private
-    attr_accessor :require_block, :require_as
+    attr_accessor :require_block, :require_as, :original_caller
   end
 end
 
@@ -20,11 +22,12 @@ module Kernel
   # Gem::Dependency:: The dependency information.
   #
   # :api: private
-  def track_dependency(name, *ver, &blk)
+  def track_dependency(name, clr, *ver, &blk)
     options = ver.pop if ver.last.is_a?(Hash)
     new_dep = Gem::Dependency.new(name, ver.empty? ? nil : ver)
     new_dep.require_block = blk
     new_dep.require_as = (options && options[:require_as]) || name
+    new_dep.original_caller = clr
     
     deps = Merb::BootLoader::Dependencies.dependencies
 
@@ -107,9 +110,9 @@ module Kernel
   def dependency(name, *ver, &blk)
     immediate = ver.last.delete(:immediate) if ver.last.is_a?(Hash)
     if immediate || Merb::BootLoader.finished?(Merb::BootLoader::Dependencies)
-      load_dependency(name, *ver, &blk)
+      load_dependency(name, caller, *ver, &blk)
     else
-      track_dependency(name, *ver, &blk)
+      track_dependency(name, caller, *ver, &blk)
     end
   end
 
@@ -135,14 +138,17 @@ module Kernel
   # Gem::Dependency:: The dependency information.
   #
   # :api: private
-  def load_dependency(name, *ver, &blk)
-    dep = name.is_a?(Gem::Dependency) ? name : track_dependency(name, *ver, &blk)
-    Merb.logger.verbose!("activating gem '#{dep.name}' ...")
-    gem(dep)
-  rescue Gem::LoadError => e
-    msg = "Could not activate gem #{name} using gem '#{dep.name}': #{e.message}.\nIt usually means gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."
-    Merb.fatal! msg, e
-  ensure
+  def load_dependency(name, clr, *ver, &blk)
+    begin
+      dep = name.is_a?(Gem::Dependency) ? name : track_dependency(name, clr, *ver, &blk)
+      Merb.logger.verbose!("activating gem '#{dep.name}' ...")
+      Gem.activate(dep)
+    rescue Gem::LoadError => e
+      e.set_backtrace dep.original_caller
+      msg = "Could not activate gem #{name} using gem '#{dep.name}': #{e.message}.\nIt usually means gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."      
+      Merb.fatal! msg, e
+    end
+  
     begin
       Merb.logger.verbose!("loading gem '#{dep.name}' ...")
       [dep.require_as].flatten.each do |req|
@@ -151,6 +157,7 @@ module Kernel
       end
     rescue LoadError => e
       msg = "Could not load gem #{name} (tried to require #{dep.require_as.inspect}): #{e.message}.\nIt may happen because you mispelled file to require or gem has unsatisfied dependencies. Run Merb with --verbose option if you are not sure what the problem is."
+      e.set_backtrace dep.original_caller
       Merb.fatal! msg, e
     end
 
