@@ -19,7 +19,22 @@ module DateAndTimeFormatting
     # ==== Returns
     # String:: formatted string
     # 
-    # @api public
+    # ==== Example
+    #   Time.now.formatted(:rfc822) # => "Sun, 16 Nov 2007 00:21:16 -0800"
+    #   Time.now.formatted(:db) # => "2008-11-16 00:22:09"
+    #
+    # You can also add your own formats using +Date.add_format+ when your app loads.
+    #
+    # # Add the following to your init.rb
+    #   Merb::BootLoader.before_app_loads do
+    #     Date.add_format(:matt, "%H:%M:%S %Y-%m-%d")
+    #   end
+    #
+    # # Format a Time instance with the format you just specified
+    #   Time.now.formatted(:matt) # => "00:00:00 2007-11-02"
+    #
+    #--
+    # @public
     def formatted(format = :default)
       self.strftime(Date.formats[format])
     end
@@ -41,13 +56,20 @@ module DateAndTimeFormatting
     #
     # ==== Returns
     # Hash:: a hash with all formats available
-    #
-    # @api public
+    # --
+    # @public
     def formats
       @@formats
     end
     
     # Adds a date and time format
+    # 
+    # Because this operation is not thread safe, you should define
+    # custom formats when you load you application. The recommended way
+    # to do that, is to use the before_app_loads bootloader.
+    #
+    # If you want to add a format at runtime, you will need to use a mutex
+    # and synchronize it yourself.
     #
     # ==== Parameters
     # key<Symbol>:: name of the format
@@ -56,15 +78,23 @@ module DateAndTimeFormatting
     # ==== Returns
     # Hash:: a hash with all formats available
     #
-    # @api public
+    # ==== Example
+    #
+    #   Merb::BootLoader.before_app_loads do
+    #     Date.add_format(:matt, "%H:%M:%S %Y-%m-%d")
+    #   end
+    # 
+    #
+    # --
+    # @public
     def add_format(key, format)
       formats.merge!({key => format})
     end
     
     
     # Resets the date and time formats
-    #
-    # @api private
+    # --
+    # @private
     def reset_formats
       original_formats = [:db, :time, :short, :date, :long, :long_ordinal, :rfc822]
       formats = @@formats.delete_if{|format, v| !original_formats.include?(format)}
