@@ -92,6 +92,8 @@
 # <code>params[:action]</code> and <code>params[:controller]</code> have been deprecated as of
 # the 0.9.0 release. They are no longer set during dispatch, and
 # have been replaced by <code>action_name</code> and <code>controller_name</code> respectively.
+module Merb::InlineTemplates; end
+
 class Merb::AbstractController
   include Merb::RenderMixin
   include Merb::InlineTemplates
