@@ -2,11 +2,7 @@ namespace :slices do
   namespace :"merb-auth-slice-password" do
   
     desc "Install MerbAuthSlicePassword"
-    task :install => [:preflight, :setup_directories, :copy_assets, :migrate]
-    
-    desc "Test for any dependencies"
-    task :preflight do # see slicetasks.rb
-    end
+    task :install => [:setup_directories, :copy_assets]
   
     desc "Setup directories"
     task :setup_directories do
@@ -42,24 +38,12 @@ namespace :slices do
       copied.each { |f| puts "- copied #{f}" }
       preserved.each { |f| puts "! preserved override as #{f}" }
     end
-    
-    desc "Migrate the database"
-    task :migrate do # see slicetasks.rb
-    end
+
     
     desc "Freeze MerbAuthSlicePassword into your app (only merb-auth-slice-password/app)" 
     task :freeze => [ "freeze:app" ]
 
     namespace :freeze do
-      
-      desc "Freezes MerbAuthSlicePassword by installing the gem into application/gems using merb-freezer"
-      task :gem do
-        begin
-          Object.const_get(:Freezer).freeze(ENV["GEM"] || "merb-auth-slice-password", ENV["UPDATE"], ENV["MODE"] || 'rubygems')
-        rescue NameError
-          puts "! dependency 'merb-freezer' missing"
-        end
-      end
       
       desc "Freezes MerbAuthSlicePassword by copying all files from merb-auth-slice-password/app to your application"
       task :app do
@@ -87,9 +71,6 @@ namespace :slices do
         copied.each { |f| puts "- copied #{f}" }
         preserved.each { |f| puts "! preserved override as #{f}" }
       end
-      
-      desc "Freezes MerbAuthSlicePassword as a gem and copies over merb-auth-slice-password/app"
-      task :app_with_gem => [:gem, :app]
       
       desc "Freezes MerbAuthSlicePassword by unpacking all files into your application"
       task :unpack do

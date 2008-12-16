@@ -6,7 +6,7 @@ if defined?(Merb::Plugins)
   require 'merb-auth-core'
   require 'merb-auth-more'
     
-  Merb::Plugins.add_rakefiles "merb-auth-slice-password/merbtasks", "merb-auth-slice-password/slicetasks", "merb-auth-slice-password/spectasks"
+  Merb::Plugins.add_rakefiles "merb-auth-slice-password/merbtasks", "merb-auth-slice-password/spectasks"
 
   # Register the Slice for the current host application
   Merb::Slices::register(__FILE__)
@@ -25,7 +25,7 @@ if defined?(Merb::Plugins)
     
     # Slice metadata
     self.description = "MerbAuthSlicePassword is a merb slice that provides basic password based logins"
-    self.version = Gem.loaded_specs["merb-auth-slice-password"].version.version rescue Merb::VERSION
+    self.version = Gem.loaded_specs["merb_auth_slice_password"].version.version rescue Merb::VERSION
     self.author = "Daniel Neighman"
     
     # Stub classes loaded hook - runs before LoadClasses BootLoader
